@@ -187,16 +187,7 @@
         .news-ticker-content {
             display: inline-block;
             white-space: nowrap;
-            animation: ticker 35s linear infinite;
-            will-change: transform;
-            transform: translateZ(0);
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-        }
-
-        @keyframes ticker {
-            0%   { transform: translate3d(100vw, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
+            /* JS দিয়ে smooth scroll — CSS animation মোবাইলে lag করে */
         }
 
         /* ========== হিরো সেকশন — উন্নত ========== */
@@ -1447,7 +1438,7 @@
         <div class="nav-container">
             <div class="logo">
                 <i class="fas fa-mosque"></i>
-                <span>নারায়নপুর যুব-সমাজ</span>
+                <span>অফিসিয়াল ওয়েবসাইট</span>
             </div>
             
             <div class="menu-toggle" id="menuToggle" onclick="toggleDrawer()">
@@ -1487,7 +1478,7 @@
                         <span onclick="togglePassVis('drawerPassword', this)" style="position:absolute;right:0.7rem;top:50%;transform:translateY(-50%);cursor:pointer;color:#888;font-size:0.95rem;"><i class="fas fa-eye"></i></span>
                     </div>
                 </div>
-                <button class="btn btn-small" onclick="handleDrawerLogin()">লগইন</button>
+                <button class="btn btn-small" id="drawerLoginBtn" onclick="handleDrawerLogin()">লগইন</button>
                 <p style="text-align: center; margin: 0.5rem 0; font-size: 0.9rem;">অথবা</p>
                 <button class="btn btn-small" onclick="showRegisterModal()">নিবন্ধন</button>
             </div>
@@ -1530,7 +1521,7 @@
         <div class="hero-pattern"></div>
         <div class="hero-content">
             <span class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</span>
-            <h1>নারায়নপুর ইসলামী আইডিয়াল যুব সমাজে আপনাকে স্বাগতম</h1>
+            <h1>নারায়নপুর ইসলামী আইডিয়াল যুব সমাজে স্বাগতম</h1>
             <p class="hero-tagline">একটি সুন্দর ইসলামিক সমাজ গড়ার লক্ষ্যে আমরা একতাবদ্ধ</p>
             <div class="hero-ayat">
                 <span>وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ</span><br>
@@ -1644,7 +1635,7 @@
             <div class="stat-card">
                 <i class="fas fa-users"></i>
                 <h3 id="totalMembers">0</h3>
-                <p>মোট সদস্য</p>
+                <p>সক্রিয় সদস্য</p>
             </div>
             <div class="stat-card">
                 <i class="fas fa-calendar-alt"></i>
@@ -1677,7 +1668,7 @@
             <div class="stat-card" style="border-top:3px solid #ffd700;">
                 <i class="fas fa-wallet" style="color:#856404;"></i>
                 <h3 id="currentBalance" style="color:#856404;">0</h3>
-                <p>বর্তমান ক্যাশ (৳)</p>
+                <p>বর্তমান ব্যালেন্স (৳)</p>
             </div>
             <div class="stat-card" style="border-top:3px solid #1a472a;">
                 <i class="fas fa-user-friends" style="color:#1a472a;"></i>
@@ -1924,7 +1915,7 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; ২০২৬ নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ - সর্বস্বত্ব সংরক্ষিত</p>
+            <p>&copy; ২০২৬ নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ | Developed By Tuhin Ahmed</p>
         </div>
     </footer>
 
@@ -2280,54 +2271,137 @@
 
         // ========== অথেনটিকেশন ফাংশন ==========
         async function handleDrawerLogin() {
-            const email = document.getElementById('drawerEmail').value;
+            const email    = document.getElementById('drawerEmail').value.trim();
             const password = document.getElementById('drawerPassword').value;
-            
+            const btn      = document.getElementById('drawerLoginBtn');
+
+            if (!email || !password) {
+                showNotification('ইমেইল ও পাসওয়ার্ড দিন!', 'error');
+                return;
+            }
+
+            if (btn) { btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i>'; }
+
             try {
-                const userCredential = await auth.signInWithEmailAndPassword(email, password);
-                showNotification('লগইন সফল', 'success');
+                await auth.signInWithEmailAndPassword(email, password);
+                showNotification('লগইন সফল হয়েছে!', 'success');
                 closeDrawer();
+
+                // Firestore এ ইউজার doc না থাকলে তৈরি করো
+                const user = auth.currentUser;
+                if (user) {
+                    const doc = await db.collection('users').doc(user.uid).get();
+                    if (!doc.exists) {
+                        await db.collection('users').doc(user.uid).set({
+                            name:  user.displayName || email.split('@')[0],
+                            email: user.email,
+                            phone: '',
+                            role:  'member',
+                            isActive: true,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                            uid: user.uid,
+                            restoredAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
+                        console.log('User doc restored');
+                    }
+                }
             } catch (error) {
-                showNotification('ভুল হচ্ছে.! দয়া করে সঠিক তথ্য দিন ', 'error');
+                console.error('Login error:', error.code);
+                const msgs = {
+                    'auth/user-not-found':          'এই ইমেইলে কোনো অ্যাকাউন্ট নেই!',
+                    'auth/wrong-password':          'পাসওয়ার্ড ভুল!',
+                    'auth/invalid-credential':      'ইমেইল বা পাসওয়ার্ড ভুল!',
+                    'auth/invalid-email':           'ইমেইল ঠিকানা সঠিক নয়!',
+                    'auth/user-disabled':           'এই অ্যাকাউন্ট নিষ্ক্রিয় করা হয়েছে!',
+                    'auth/network-request-failed':  'ইন্টারনেট সংযোগ সমস্যা!',
+                    'auth/too-many-requests':       'অনেকবার ভুল চেষ্টা। কিছুক্ষণ পর চেষ্টা করুন।',
+                };
+                showNotification(msgs[error.code] || 'লগইন ব্যর্থ! আবার চেষ্টা করুন।', 'error');
+            } finally {
+                if (btn) { btn.disabled=false; btn.innerHTML='লগইন'; }
             }
         }
 
         // রেজিস্ট্রেশন ফর্ম
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            const name = document.getElementById('regName').value;
-            const email = document.getElementById('regEmail').value;
-            const phone = document.getElementById('regPhone').value;
-            const address = document.getElementById('regAddress').value;
+            const btn = e.target.querySelector('button[type="submit"]');
+            if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> অপেক্ষা করুন...'; }
+
+            const name     = document.getElementById('regName').value.trim();
+            const email    = document.getElementById('regEmail').value.trim();
+            const phone    = document.getElementById('regPhone').value.trim();
+            const address  = document.getElementById('regAddress').value.trim();
             const password = document.getElementById('regPassword').value;
-            const confirmPassword = document.getElementById('regConfirmPassword').value;
-            
-            if (password !== confirmPassword) {
-                showNotification('পাসওয়ার্ড ভুল!', 'error');
+            const confirm  = document.getElementById('regConfirmPassword').value;
+
+            if (!name || !email || !password) {
+                showNotification('নাম, ইমেইল ও পাসওয়ার্ড আবশ্যক!', 'error');
+                if (btn) { btn.disabled=false; btn.innerHTML='নিবন্ধন করুন'; }
                 return;
             }
-            
+            if (password !== confirm) {
+                showNotification('পাসওয়ার্ড মিলছে না!', 'error');
+                if (btn) { btn.disabled=false; btn.innerHTML='নিবন্ধন করুন'; }
+                return;
+            }
+            if (password.length < 6) {
+                showNotification('পাসওয়ার্ড কমপক্ষে ৬ অক্ষর হতে হবে!', 'error');
+                if (btn) { btn.disabled=false; btn.innerHTML='নিবন্ধন করুন'; }
+                return;
+            }
+
             try {
-                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-                const user = userCredential.user;
-                
+                // Firebase Auth এ ইউজার তৈরি
+                const cred = await auth.createUserWithEmailAndPassword(email, password);
+                const user = cred.user;
+
+                // Display name সেট
                 await user.updateProfile({ displayName: name });
-                
-                await db.collection('users').doc(user.uid).set({
-                    name: name,
-                    email: email,
-                    phone: phone,
-                    address: address,
+
+                // Firestore এ ইউজার ডেটা সেভ (users collection)
+                const userData = {
+                    name, email, phone, address,
                     role: 'member',
-                    createdAt: new Date()
-                });
-                
-                showNotification('রেজিস্ট্রেশন সফল হয়েছে!', 'success');
+                    isActive: true,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    uid: user.uid
+                };
+
+                // retry logic — collection ডিলিট হলেও নতুন করে তৈরি হবে
+                let saved = false;
+                for (let attempt = 0; attempt < 3; attempt++) {
+                    try {
+                        await db.collection('users').doc(user.uid).set(userData);
+                        saved = true;
+                        break;
+                    } catch (writeErr) {
+                        console.warn(`Firestore write attempt ${attempt+1} failed:`, writeErr);
+                        await new Promise(r => setTimeout(r, 1000));
+                    }
+                }
+
+                if (!saved) {
+                    // Auth তৈরি হয়েছে কিন্তু Firestore লেখা যায়নি — তবুও লগইন হবে
+                    console.warn('Firestore write failed, auth created');
+                }
+
+                showNotification(`স্বাগতম ${name}! নিবন্ধন সফল হয়েছে।`, 'success');
                 closeModal('registerModal');
-                
+                e.target.reset();
+
             } catch (error) {
-                showNotification('রেজিস্ট্রেশন ব্যর্থ.! দয়া করে সঠিক তথ্য দিন ', 'error');
+                console.error('Register error:', error.code, error.message);
+                const msgs = {
+                    'auth/email-already-in-use':    'এই ইমেইল ইতিমধ্যে ব্যবহৃত হচ্ছে!',
+                    'auth/invalid-email':           'ইমেইল ঠিকানা সঠিক নয়!',
+                    'auth/weak-password':           'পাসওয়ার্ড কমপক্ষে ৬ অক্ষর হতে হবে!',
+                    'auth/network-request-failed':  'ইন্টারনেট সংযোগ সমস্যা! আবার চেষ্টা করুন।',
+                    'auth/too-many-requests':       'অনেকবার চেষ্টা করা হয়েছে। কিছুক্ষণ পর চেষ্টা করুন।',
+                };
+                showNotification(msgs[error.code] || `সমস্যা: ${error.message}`, 'error');
+            } finally {
+                if (btn) { btn.disabled=false; btn.innerHTML='নিবন্ধন করুন'; }
             }
         });
 
@@ -2335,22 +2409,41 @@
         auth.onAuthStateChanged(async (user) => {
             if (user) {
                 currentUser = user;
-                document.getElementById('drawerUserStatus').textContent = user.displayName || 'সদস্য';
+                const displayName = user.displayName || 'সদস্য';
+                document.getElementById('drawerUserStatus').textContent = displayName;
                 document.getElementById('drawerLoginForm').style.display = 'none';
                 document.getElementById('drawerUserInfo').style.display = 'block';
-                document.getElementById('drawerUserName').textContent = user.displayName || 'সদস্য';
-                
-                // অ্যাডমিন চেক
-                const userDoc = await db.collection('users').doc(user.uid).get();
-                if (userDoc.exists && userDoc.data().role === 'admin') {
-                    document.getElementById('adminPanelBtn').style.display = 'block';
-                document.getElementById('adminPanelBtn').onclick = () => { window.location.href = 'admin.html'; };
+                document.getElementById('drawerUserName').textContent = displayName;
+
+                // Firestore doc চেক — না থাকলে restore
+                let userDoc = await db.collection('users').doc(user.uid).get();
+                if (!userDoc.exists) {
+                    // Collection ডিলিট হলে নতুন করে তৈরি করো
+                    await db.collection('users').doc(user.uid).set({
+                        name:  user.displayName || user.email.split('@')[0],
+                        email: user.email,
+                        phone: '',
+                        role:  'member',
+                        isActive: true,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        uid: user.uid,
+                        restoredAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    userDoc = await db.collection('users').doc(user.uid).get();
                 }
 
-                // সদস্য Dashboard লোড করুন
-                loadMemberDashboard(user);
+                const userData = userDoc.data() || {};
 
-                // মেনুতে Dashboard লিংক যোগ
+                // এডমিন চেক
+                if (userData.role === 'admin') {
+                    const adminBtn = document.getElementById('adminPanelBtn');
+                    if (adminBtn) {
+                        adminBtn.style.display = 'block';
+                        adminBtn.onclick = () => { window.location.href = 'admin.html'; };
+                    }
+                }
+
+                loadMemberDashboard(user);
                 const dashLink = document.getElementById('dashboardMenuLink');
                 if (dashLink) dashLink.style.display = 'block';
 
@@ -2360,8 +2453,6 @@
                 document.getElementById('drawerLoginForm').style.display = 'block';
                 document.getElementById('drawerUserInfo').style.display = 'none';
                 document.getElementById('adminPanelBtn').style.display = 'none';
-
-                // Dashboard লুকান
                 hideMemberDashboard();
                 const dashLink = document.getElementById('dashboardMenuLink');
                 if (dashLink) dashLink.style.display = 'none';
@@ -2641,6 +2732,39 @@
         };
 
         // ========== নিউজ টিকার লোড ==========
+        // ===== Ticker smooth scroll — requestAnimationFrame =====
+        let tickerPos = null;
+        let tickerRAF = null;
+
+        function startTickerScroll() {
+            const wrap = document.querySelector('.news-ticker');
+            const el   = document.getElementById('newsTickerContent');
+            if (!wrap || !el) return;
+
+            const wrapW = wrap.offsetWidth;
+            if (tickerPos === null) tickerPos = wrapW; // শুরু: ডান দিক থেকে
+
+            function step() {
+                tickerPos -= 1.2; // speed
+                const elW = el.offsetWidth;
+                if (tickerPos < -elW) tickerPos = wrapW; // reset
+                el.style.transform = `translateX(${tickerPos}px)`;
+                tickerRAF = requestAnimationFrame(step);
+            }
+
+            if (tickerRAF) cancelAnimationFrame(tickerRAF);
+            tickerRAF = requestAnimationFrame(step);
+
+            // Page visibility — tab লুকালে pause
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    cancelAnimationFrame(tickerRAF);
+                } else {
+                    tickerRAF = requestAnimationFrame(step);
+                }
+            });
+        }
+
         async function loadNewsTicker() {
             try {
                 const snapshot = await db.collection('newsTicker').orderBy('updatedAt', 'desc').limit(1).get();
@@ -2767,6 +2891,7 @@
             loadDonationHistory();
             loadPrayerTimes();
             loadSiteSettings();
+            setTimeout(startTickerScroll, 500);
             // Real-time listeners
             db.collection('donations').onSnapshot(() => { loadStatistics(); loadDonationHistory(); });
             db.collection('settings').doc('finance').onSnapshot(() => loadStatistics());
