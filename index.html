@@ -193,7 +193,7 @@
         /* ========== হিরো সেকশন — উন্নত ========== */
         .hero {
             background: linear-gradient(160deg, rgba(10,30,15,0.92) 0%, rgba(26,71,42,0.88) 50%, rgba(15,40,20,0.93) 100%),
-                        url('https://i.ibb.co.com/JRYMwX9n/FB-IMG-1771793843597.jpg');
+                        url('https://images.unsplash.com/photo-1564769662533-4f00a87b4056?auto=format&fit=crop&w=1400&q=80');
             background-size: cover;
             background-position: center;
             min-height: 480px;
@@ -1438,7 +1438,7 @@
         <div class="nav-container">
             <div class="logo">
                 <i class="fas fa-mosque"></i>
-                <span>নারানপুর যুব সমাজ</span>
+                <span>অফিসিয়াল ওয়েবসাইট</span>
             </div>
             
             <div class="menu-toggle" id="menuToggle" onclick="toggleDrawer()">
@@ -1485,8 +1485,8 @@
             
             <div id="drawerUserInfo" style="display: none;">
                 <p id="drawerUserName"></p>
-                <button class="btn btn-small" onclick="logout()">লগআউট</button>
-                <button class="btn btn-small" id="adminPanelBtn" style="display: none; background: #ffd700; color: #1a472a;" onclick="goToAdminPanel()">অ্যাডমিন প্যানেল</button>
+                <button class="btn btn-small" onclick="logout()" style="width:100%; margin-bottom:0.5rem;"><i class="fas fa-sign-out-alt"></i> লগআউট</button>
+                <button class="btn btn-small" id="adminPanelBtn" style="display:none; width:100%; background:linear-gradient(135deg,#ffd700,#e6b800); color:#1a472a; font-weight:700; box-shadow:0 4px 12px rgba(255,215,0,0.4);" onclick="goToAdminPanel()"><i class="fas fa-user-shield"></i> অ্যাডমিন প্যানেলে যান</button>
             </div>
         </div>
     </div>
@@ -1521,7 +1521,7 @@
         <div class="hero-pattern"></div>
         <div class="hero-content">
             <span class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</span>
-            <h1>নারায়নপুর ইসলামী আইডিয়াল যুব সমাজে আপনাকে স্বাগতম</h1>
+            <h1>নারায়নপুর ইসলামী আইডিয়াল যুব সমাজে স্বাগতম</h1>
             <p class="hero-tagline">একটি সুন্দর ইসলামিক সমাজ গড়ার লক্ষ্যে আমরা একতাবদ্ধ</p>
             <div class="hero-ayat">
                 <span>وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ</span><br>
@@ -1635,12 +1635,12 @@
             <div class="stat-card">
                 <i class="fas fa-users"></i>
                 <h3 id="totalMembers">0</h3>
-                <p>মোট সদস্য</p>
+                <p>সক্রিয় সদস্য</p>
             </div>
             <div class="stat-card">
                 <i class="fas fa-calendar-alt"></i>
                 <h3 id="totalEvents">0</h3>
-                <p>বাৎসরিক আয়োজন</p>
+                <p>মোট আয়োজন</p>
             </div>
             <div class="stat-card">
                 <i class="fas fa-hand-holding-heart"></i>
@@ -1668,7 +1668,7 @@
             <div class="stat-card" style="border-top:3px solid #ffd700;">
                 <i class="fas fa-wallet" style="color:#856404;"></i>
                 <h3 id="currentBalance" style="color:#856404;">0</h3>
-                <p>বর্তমান ক্যাশ (৳)</p>
+                <p>বর্তমান ব্যালেন্স (৳)</p>
             </div>
             <div class="stat-card" style="border-top:3px solid #1a472a;">
                 <i class="fas fa-user-friends" style="color:#1a472a;"></i>
@@ -1723,7 +1723,7 @@
 
             <!-- দানকারীর নাম (ঐচ্ছিক) -->
             <div class="form-group" style="margin-bottom: 1rem;">
-                <input type="text" id="donorName" placeholder="আপনার নাম লিখুন (ঐচ্ছিক)" style="width:100%; padding:0.7rem; border:1px solid #ddd; border-radius:10px; font-family:'Noto Sans Bengali',sans-serif;">
+                <input type="text" id="donorName" placeholder="আপনার নাম (ঐচ্ছিক)" style="width:100%; padding:0.7rem; border:1px solid #ddd; border-radius:10px; font-family:'Noto Sans Bengali',sans-serif;">
             </div>
 
             <!-- দান করুন বাটন -->
@@ -1864,7 +1864,7 @@
                     </div>
                     <div>
                         <div style="font-weight:600;color:#1a472a;font-size:0.9rem;">ফোন</div>
-                        <div id="contactPhone" style="color:#555;font-size:0.85rem;"><a href="tel:+8801778590126" id="contactPhoneLink" style="color:#555;text-decoration:none;">+৮৮০১৮৭৩০১১৭৩৬</a></div>
+                        <div id="contactPhone" style="color:#555;font-size:0.85rem;"><a href="tel:+8801873011736" id="contactPhoneLink" style="color:#555;text-decoration:none;">+৮৮০১৮৭৩০১১৭৩৬</a></div>
                     </div>
                 </div>
                 <div style="display:flex;align-items:center;gap:1rem;background:#f8f9fa;padding:1.2rem;border-radius:12px;">
@@ -1873,7 +1873,7 @@
                     </div>
                     <div>
                         <div style="font-weight:600;color:#1a472a;font-size:0.9rem;">ইমেইল</div>
-                        <div id="contactEmail" style="color:#555;font-size:0.85rem;"><a href="mailto:info@narayanpurjubosomaj.com" id="contactEmailLink" style="color:#555;text-decoration:none;">tuhinahmed1736@gmail.com</a></div>
+                        <div id="contactEmail" style="color:#555;font-size:0.85rem;"><a href="mailto:tuhinahmed1736@gmail.com" id="contactEmailLink" style="color:#555;text-decoration:none;">tuhinahmed1736@gmail.com</a></div>
                     </div>
                 </div>
             </div>
@@ -1915,7 +1915,7 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; ২০২৬ নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ | সর্বস্বত্ব সংরক্ষিত</p>
+            <p>&copy; ২০২৬ নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ | Developed By Tuhin Ahmed</p>
         </div>
     </footer>
 
@@ -1942,6 +1942,7 @@
 
         // ========== গ্লোবাল ভেরিয়েবল ==========
         let currentUser = null;
+        let isRegistering = false; // race condition প্রতিরোধ
         let selectedPlan = null;
         let selectedPaymentMethod = null;
 
@@ -2292,14 +2293,14 @@
                     const doc = await db.collection('users').doc(user.uid).get();
                     if (!doc.exists) {
                         await db.collection('users').doc(user.uid).set({
-                            name:  user.displayName || email.split('@')[0],
-                            email: user.email,
-                            phone: '',
-                            role:  'member',
-                            isActive: true,
-                            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                            uid: user.uid,
-                            restoredAt: firebase.firestore.FieldValue.serverTimestamp()
+                            name:       user.displayName || email.split('@')[0],
+                            email:      user.email,
+                            phone:      '',
+                            role:       'member',
+                            isActive:   true,
+                            createdAt:  new Date().toISOString(),
+                            uid:        user.uid,
+                            restoredAt: new Date().toISOString()
                         });
                         console.log('User doc restored');
                     }
@@ -2350,8 +2351,10 @@
                 return;
             }
 
+            isRegistering = true; // onAuthStateChanged কে Firestore write স্কিপ করতে বলো
+
             try {
-                // ধাপ ১: Firebase Auth এ account তৈরি
+                // ধাপ ১: Firebase Auth এ account তৈরি (এটাই সবচেয়ে সময় নেয় — Firebase সার্ভার call)
                 const cred = await auth.createUserWithEmailAndPassword(email, password);
                 const user = cred.user;
 
@@ -2375,12 +2378,18 @@
                     uid:       user.uid
                 };
 
+                // Firestore write এ 8 সেকেন্ড timeout — কখনো অনন্তকাল আটকাবে না
+                const writeWithTimeout = Promise.race([
+                    db.collection('users').doc(user.uid).set(userData),
+                    new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 8000))
+                ]);
+
                 try {
-                    await db.collection('users').doc(user.uid).set(userData);
+                    await writeWithTimeout;
                     console.log('✅ Firestore user saved:', user.uid);
                 } catch (fsErr) {
-                    console.error('⚠️ Firestore error:', fsErr.code, fsErr.message);
-                    // Auth account তৈরি হয়েছে, Firestore পরে sync হবে
+                    console.error('⚠️ Firestore write সমস্যা/timeout:', fsErr.message);
+                    // Auth account তৈরি — পরে লগইন করলে onAuthStateChanged এ auto-restore হবে
                 }
 
                 showNotification('স্বাগতম ' + name + '! নিবন্ধন সফল হয়েছে।', 'success');
@@ -2400,6 +2409,7 @@
                 showNotification(msgs[error.code] || ('সমস্যা: ' + error.message), 'error');
             } finally {
                 if (btn) { btn.disabled = false; btn.innerHTML = 'নিবন্ধন সম্পন্ন করুন'; }
+                isRegistering = false;
             }
         });
 
@@ -2413,19 +2423,27 @@
                 document.getElementById('drawerUserInfo').style.display = 'block';
                 document.getElementById('drawerUserName').textContent = displayName;
 
+                // নিবন্ধন চলমান থাকলে এখানে Firestore write স্কিপ করো (race condition প্রতিরোধ)
+                if (isRegistering) {
+                    loadMemberDashboard(user);
+                    const dashLink = document.getElementById('dashboardMenuLink');
+                    if (dashLink) dashLink.style.display = 'block';
+                    return;
+                }
+
                 // Firestore doc চেক — না থাকলে restore
                 let userDoc = await db.collection('users').doc(user.uid).get();
                 if (!userDoc.exists) {
                     // Collection ডিলিট হলে নতুন করে তৈরি করো
                     await db.collection('users').doc(user.uid).set({
-                        name:  user.displayName || user.email.split('@')[0],
-                        email: user.email,
-                        phone: '',
-                        role:  'member',
-                        isActive: true,
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                        uid: user.uid,
-                        restoredAt: firebase.firestore.FieldValue.serverTimestamp()
+                        name:       user.displayName || user.email.split('@')[0],
+                        email:      user.email,
+                        phone:      '',
+                        role:       'member',
+                        isActive:   true,
+                        createdAt:  new Date().toISOString(),
+                        uid:        user.uid,
+                        restoredAt: new Date().toISOString()
                     });
                     userDoc = await db.collection('users').doc(user.uid).get();
                 }
@@ -2539,7 +2557,7 @@
                             <div class="payment-amount">${plan.amount} ৳</div>
                             <p>${plan.description}</p>
                             <button class="btn-small">পেমেন্ট করুন</button>
-                        <link rel="stylesheet" href="  ">
+                        <link rel="stylesheet" href="https://narayanpur.paymently.io/paymentlink/default/BDT">
                         </div>
                     `;
                 });
