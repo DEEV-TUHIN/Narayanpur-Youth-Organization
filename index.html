@@ -2647,10 +2647,11 @@
         async function loadDonationHistory() {
             const feed = document.getElementById('donationHistoryFeed');
             try {
+                // orderBy বাদ — পুরোনো (Timestamp) ও নতুন (string) createdAt mixed থাকলে
+                // Firestore orderBy query crash করে, তাই client-side sort করছি
                 const snapshot = await db.collection('donations')
                     .where('status', 'in', ['completed', 'approved'])
-                    .orderBy('createdAt', 'desc')
-                    .limit(30)
+                    .limit(50)
                     .get();
 
                 if (snapshot.empty) {
@@ -2658,10 +2659,26 @@
                     return;
                 }
 
-                let html = '';
+                // ডেটা সংগ্রহ ও sort
+                let donations = [];
                 snapshot.forEach(doc => {
                     const d = doc.data();
-                    const date = d.createdAt?.toDate ? d.createdAt.toDate().toLocaleDateString('bn-BD') : 'অজানা তারিখ';
+                    let dateObj;
+                    if (d.createdAt?.toDate) {
+                        dateObj = d.createdAt.toDate(); // Firestore Timestamp (পুরোনো ডাটা)
+                    } else if (typeof d.createdAt === 'string') {
+                        dateObj = new Date(d.createdAt); // ISO string (নতুন ডাটা)
+                    } else {
+                        dateObj = new Date(0);
+                    }
+                    donations.push({ ...d, _dateObj: dateObj });
+                });
+                donations.sort((a, b) => b._dateObj - a._dateObj);
+                donations = donations.slice(0, 30);
+
+                let html = '';
+                donations.forEach(d => {
+                    const date = d._dateObj.getTime() > 0 ? d._dateObj.toLocaleDateString('bn-BD') : 'অজানা তারিখ';
                     const name = d.donorName || 'বেনামী দাতা';
                     const initial = name.charAt(0).toUpperCase();
                     html += `
@@ -2671,14 +2688,14 @@
                                 <strong>${name}</strong>
                                 <small><i class="fas fa-calendar-alt"></i> ${date} &nbsp;|&nbsp; <i class="fas fa-check-circle" style="color:#28a745;"></i> অনুমোদিত</small>
                             </div>
-                            <div class="donation-amount-badge">${d.amount.toLocaleString('bn-BD')} ৳</div>
+                            <div class="donation-amount-badge">${(d.amount || 0).toLocaleString('bn-BD')} ৳</div>
                         </div>
                     `;
                 });
                 feed.innerHTML = html;
             } catch (error) {
                 feed.innerHTML = '<div class="no-donations-msg">দান ইতিহাস লোড করতে সমস্যা হয়েছে।</div>';
-                console.error(error);
+                console.error('loadDonationHistory error:', error);
             }
         }
 
