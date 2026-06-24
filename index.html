@@ -1940,6 +1940,10 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
+        // Firestore connection settings — "offline" সমস্যা প্রতিরোধ
+        db.settings({ cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED });
+        db.enableNetwork().catch(e => console.warn('enableNetwork:', e.message));
+
         // ========== গ্লোবাল ভেরিয়েবল ==========
         let currentUser = null;
         let isRegistering = false; // race condition প্রতিরোধ
@@ -2917,12 +2921,10 @@
 
         // ========== সাইট সেটিংস (যোগাযোগ + সোশ্যাল) লোড ==========
         function loadSiteSettings() {
-            // Real-time listener — admin যেকোনো device থেকে পরিবর্তন করলে তাৎক্ষণিক আপডেট
+            // Real-time listener — admin যেকোনো device থেকে পরিবর্তন করলে তাৎক্ষণিক আপডেট (সব ডিভাইসে)
             db.collection('settings').doc('siteInfo').onSnapshot(doc => {
               if (!doc.exists) return;
-              const d = doc.data();
               try {
-                if (!doc.exists) return;
                 const d = doc.data();
 
                 // যোগাযোগ সেকশন আপডেট
@@ -2956,6 +2958,8 @@
                     }
                 });
               } catch(e) { console.log('সেটিংস লোড:', e); }
+            }, err => {
+                console.error('siteInfo onSnapshot error:', err.code, err.message);
             });
         }
 
@@ -2967,11 +2971,20 @@
             loadDonationHistory();
             loadPrayerTimes();
             loadSiteSettings();
-            // Real-time listeners
-            db.collection('donations').onSnapshot(() => { loadStatistics(); loadDonationHistory(); });
-            db.collection('settings').doc('finance').onSnapshot(() => loadStatistics());
+            // Real-time listeners — সব ডিভাইসে তাৎক্ষণিক sync
+            db.collection('donations').onSnapshot(
+                () => { loadStatistics(); loadDonationHistory(); },
+                err => console.error('donations listener:', err.code)
+            );
+            db.collection('settings').doc('finance').onSnapshot(
+                () => loadStatistics(),
+                err => console.error('finance listener:', err.code)
+            );
             // নামাজ সময় real-time
-            db.collection('settings').doc('prayerTimes').onSnapshot(() => loadPrayerTimes());
+            db.collection('settings').doc('prayerTimes').onSnapshot(
+                () => loadPrayerTimes(),
+                err => console.error('prayerTimes listener:', err.code)
+            );
             // দৈনিক আয়াত — আজকের তারিখ অনুযায়ী
             currentAyatIdx = getDailyIndex(QURAN_AYATS);
             currentHadithIdx = getDailyIndex(HADITHS);
