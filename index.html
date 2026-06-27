@@ -1364,6 +1364,14 @@
             color: #888;
             font-size: 0.8rem;
         }
+        .donation-note {
+            color: #1a472a;
+            font-size: 0.78rem;
+            font-style: italic;
+            margin-top: 0.25rem;
+            opacity: 0.85;
+            line-height: 1.4;
+        }
         .donation-amount-badge {
             background: #d4edda;
             color: #1a472a;
@@ -1724,6 +1732,11 @@
             <!-- দানকারীর নাম (ঐচ্ছিক) -->
             <div class="form-group" style="margin-bottom: 1rem;">
                 <input type="text" id="donorName" placeholder="আপনার নাম (ঐচ্ছিক)" style="width:100%; padding:0.7rem; border:1px solid #ddd; border-radius:10px; font-family:'Noto Sans Bengali',sans-serif;">
+            </div>
+
+            <!-- দানের উদ্দেশ্য/নোট (ঐচ্ছিক) -->
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <input type="text" id="donateNote" placeholder="কি বিষয়ে দান করছেন? (ঐচ্ছিক, যেমন: মসজিদ নির্মাণ)" style="width:100%; padding:0.7rem; border:1px solid #ddd; border-radius:10px; font-family:'Noto Sans Bengali',sans-serif;">
             </div>
 
             <!-- দান করুন বাটন -->
@@ -2151,27 +2164,41 @@
                 document.getElementById('profileAddress').textContent = address || '—';
                 document.getElementById('profileJoined').textContent = joinDate || '—';
 
-                // দানের ইতিহাস
+                // দানের ইতিহাস — orderBy বাদ (mixed Timestamp/string crash এড়াতে), client-side sort
                 const donationsSnap = await db.collection('donations')
-                    .where('userId', '==', user.uid)
-                    .orderBy('createdAt', 'desc').limit(10).get();
+                    .where('userId', '==', user.uid).limit(50).get();
 
                 let totalDonation = 0;
                 let donHtml = '';
                 if (donationsSnap.empty) {
                     donHtml = '<div class="no-history-msg"><i class="fas fa-heart-broken"></i> এখনো কোনো দান করা হয়নি</div>';
                 } else {
+                    let donList = [];
                     donationsSnap.forEach(doc => {
                         const d = doc.data();
+                        let dateObj;
+                        if (d.createdAt?.toDate) dateObj = d.createdAt.toDate();
+                        else if (typeof d.createdAt === 'string') dateObj = new Date(d.createdAt);
+                        else dateObj = new Date(0);
+                        donList.push({ ...d, _dateObj: dateObj });
+                    });
+                    donList.sort((a, b) => b._dateObj - a._dateObj);
+                    donList = donList.slice(0, 10);
+
+                    donList.forEach(d => {
                         totalDonation += d.amount || 0;
-                        const date = d.createdAt?.toDate ? d.createdAt.toDate().toLocaleDateString('bn-BD') : '—';
+                        const date = d._dateObj.getTime() > 0 ? d._dateObj.toLocaleDateString('bn-BD') : '—';
                         const statusClass = d.status === 'approved' || d.status === 'completed' ? 'badge-success' : 'badge-pending';
                         const statusLabel = d.status === 'approved' || d.status === 'completed' ? 'অনুমোদিত' : 'অপেক্ষমান';
+                        const noteHtml = d.note && d.note.trim()
+                            ? `<div style="font-size:0.75rem; color:#1a472a; font-style:italic; margin-top:0.2rem;"><i class="fas fa-quote-left" style="font-size:0.6rem; opacity:0.6;"></i> ${d.note}</div>`
+                            : '';
                         donHtml += `<div class="history-item">
                             <div class="history-icon donation"><i class="fas fa-hand-holding-heart"></i></div>
                             <div class="history-info">
-                                <strong>${d.amount?.toLocaleString() || 0} ৳ দান</strong>
+                                <strong>${(d.amount || 0).toLocaleString()} ৳ দান</strong>
                                 <small>${date} &nbsp;|&nbsp; ${d.provider || 'অনলাইন'}</small>
+                                ${noteHtml}
                             </div>
                             <span class="status-badge-sm ${statusClass}">${statusLabel}</span>
                         </div>`;
@@ -2572,6 +2599,29 @@
             }
         }
 
+        // ========== পেমেন্ট গেটওয়েতে POST method এ ডাটা পাঠানো ==========
+        // GET URL এ query string পাঠালে অনেক payment gateway (bKash, Nagad, SSLCommerz)
+        // "Bad Request" / "Method Not Allowed" error দেয়, কারণ ওরা POST request আশা করে
+        function submitPaymentForm(actionUrl, dataObj) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = actionUrl;
+            form.target = '_blank'; // নতুন ট্যাবে খুলবে
+            form.style.display = 'none';
+
+            Object.keys(dataObj).forEach(key => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = dataObj[key] ?? '';
+                form.appendChild(input);
+            });
+
+            document.body.appendChild(form);
+            form.submit();
+            setTimeout(() => document.body.removeChild(form), 1000);
+        }
+
         // ========== দান ফাংশন ==========
         function setDonateAmount(amount) {
             document.getElementById('donateAmount').value = amount;
@@ -2586,7 +2636,9 @@
         async function processDonation() {
             const amount = parseInt(document.getElementById('donateAmount').value);
             const donorName = document.getElementById('donorName').value.trim() || 'বেনামী দাতা';
-            
+            const donateNoteEl = document.getElementById('donateNote');
+            const donateNote = donateNoteEl ? donateNoteEl.value.trim() : '';
+
             if (!amount || amount < 10) {
                 showNotification('সর্বনিম্ন ১০ টাকা দান করতে হবে!', 'error');
                 return;
@@ -2600,7 +2652,7 @@
             try {
                 // Firestore থেকে active payment provider লোড করুন
                 const settingsDoc = await db.collection('settings').doc('paymentProvider').get();
-                
+
                 if (!settingsDoc.exists || !settingsDoc.data().isActive) {
                     showNotification('পেমেন্ট গেটওয়ে এই মুহূর্তে বন্ধ আছে। অ্যাডমিনকে জানান।', 'error');
                     btn.disabled = false;
@@ -2611,8 +2663,10 @@
                 const providerData = settingsDoc.data();
                 const paymentUrl = providerData.paymentUrl;
                 const providerName = providerData.providerName || 'পেমেন্ট গেটওয়ে';
+                const apiKey = providerData.apiKey || '';
+                const requestMethod = (providerData.requestMethod || 'POST').toUpperCase();
 
-                // দানের রেকর্ড Firestore-এ save করুন (pending হিসেবে)
+                // দানের রেকর্ড Firestore-এ save করুন (pending হিসেবে) — note সহ
                 const donationRef = await db.collection('donations').add({
                     donorName: donorName,
                     userId: currentUser ? currentUser.uid : null,
@@ -2620,17 +2674,32 @@
                     amount: amount,
                     status: 'pending',
                     provider: providerName,
-                    createdAt: new Date(),
-                    note: ''
+                    createdAt: new Date().toISOString(),
+                    note: donateNote || ''
                 });
 
-                // পেমেন্ট URL এ redirect করুন (amount ও reference সহ)
-                const redirectUrl = `${paymentUrl}?amount=${amount}&ref=${donationRef.id}&name=${encodeURIComponent(donorName)}`;
-                
                 showNotification(`${providerName} পেমেন্ট পেজে যাচ্ছেন...`, 'success');
-                
+
                 setTimeout(() => {
-                    window.open(redirectUrl, '_blank');
+                    const paymentData = {
+                        amount: amount,
+                        ref: donationRef.id,
+                        name: donorName,
+                        api_key: apiKey,
+                        note: donateNote || '',
+                        success_url: window.location.origin + window.location.pathname + '?donation_success=' + donationRef.id,
+                        fail_url: window.location.origin + window.location.pathname + '?donation_failed=' + donationRef.id
+                    };
+
+                    if (requestMethod === 'GET') {
+                        // Admin GET সিলেক্ট করলে — query string দিয়ে নতুন ট্যাবে খুলবে
+                        const qs = new URLSearchParams(paymentData).toString();
+                        window.open(paymentUrl + (paymentUrl.includes('?') ? '&' : '?') + qs, '_blank');
+                    } else {
+                        // ডিফল্ট: POST form submit — bKash/Nagad/SSLCommerz এর মতো গেটওয়ের জন্য প্রয়োজন
+                        submitPaymentForm(paymentUrl, paymentData);
+                    }
+
                     btn.disabled = false;
                     loading.classList.remove('active');
                 }, 1000);
@@ -2681,12 +2750,16 @@
                     const date = d._dateObj.getTime() > 0 ? d._dateObj.toLocaleDateString('bn-BD') : 'অজানা তারিখ';
                     const name = d.donorName || 'বেনামী দাতা';
                     const initial = name.charAt(0).toUpperCase();
+                    const noteHtml = d.note && d.note.trim()
+                        ? `<div class="donation-note"><i class="fas fa-quote-left" style="font-size:0.65rem; opacity:0.6;"></i> ${d.note}</div>`
+                        : '';
                     html += `
                         <div class="donation-item">
                             <div class="donation-avatar">${initial}</div>
                             <div class="donation-info">
                                 <strong>${name}</strong>
                                 <small><i class="fas fa-calendar-alt"></i> ${date} &nbsp;|&nbsp; <i class="fas fa-check-circle" style="color:#28a745;"></i> অনুমোদিত</small>
+                                ${noteHtml}
                             </div>
                             <div class="donation-amount-badge">${(d.amount || 0).toLocaleString('bn-BD')} ৳</div>
                         </div>
