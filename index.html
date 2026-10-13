@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     
-    <!-- SEO Meta Tags (নতুন যুক্ত করা হয়েছে) -->
+    <!-- SEO Meta Tags -->
     <meta name="description" content="নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ - একটি সুন্দর ইসলামিক সমাজ গড়ার লক্ষ্যে আমরা একতাবদ্ধ।">
     <meta property="og:title" content="অফিসিয়াল ওয়েবসাইট | নারায়নপুর যুব সমাজ">
     <meta property="og:description" content="একটি অরাজনৈতিক ইসলামী সংগঠন যা ইসলামের সঠিক বার্তা প্রচার ও সমাজকল্যাণমূলক কার্যক্রমে নিবেদিত।">
     <meta property="og:image" content="https://i.ibb.co.com/XrH5jgXH/Chat-GPT-Image-Sep-26-2026-12-42-15-PM.png">
     <meta property="og:type" content="website">
 
-    <title>নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ</title>
-    <link rel="icon" type="image/png" href="https://i.ibb.co.com/XrH5jgXH/Chat-GPT-Image-Sep-26-2026-12-42-15-PM.png">
+    <title id="sitePageTitle">নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ</title>
+    <link rel="icon" type="image/png" id="siteFavicon" href="https://i.ibb.co.com/XrH5jgXH/Chat-GPT-Image-Sep-26-2026-12-42-15-PM.png">
     <link rel="shortcut icon" href="https://i.ibb.co.com/XrH5jgXH/Chat-GPT-Image-Sep-26-2026-12-42-15-PM.png">
     
     <!-- ফন্ট অ্যাওসাম ও গুগল ফন্টস -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- কাস্টম সিএসএস - মোবাইল ফার্স্ট (আপনার অরিজিনাল ডিজাইন ১০০% অপরিবর্তিত) -->
+    <!-- কাস্টম সিএসএস (অপ্টিমাইজড ও হার্ডওয়্যার অ্যাক্সিলারেটেড) -->
     <style>
         * {
             margin: 0;
@@ -27,22 +27,37 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
             font-family: 'Noto Sans Bengali', sans-serif;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             color: #2c3e50;
             line-height: 1.6;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: contain;
+        }
+
+        /* হার্ডওয়্যার অ্যাক্সিলারেশন ফিক্স: হেডার থেকে ড্যাশবোর্ড সেকশন */
+        .header, .prayer-times-bar, .news-ticker, .hero, .member-dashboard, .daily-ayat-section {
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         /* ========== হেডার ========== */
         .header {
             background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
             color: white;
-            padding: 0.8rem 1rem;
+            padding: 0.75rem 1rem;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.12);
         }
 
         .nav-container {
@@ -51,27 +66,102 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
+            gap: 10px;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: bold;
+            min-width: 0;
+            flex: 1;
         }
 
-        .logo i {
+        .logo-img-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-img-wrapper img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid #ffd700;
+        }
+
+        .logo-img-wrapper i {
             color: #ffd700;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .logo-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
         }
 
         .menu-toggle {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             cursor: pointer;
             color: #ffd700;
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            flex-shrink: 0;
+        }
+
+        /* ========== ড্রয়ার মেনু (স্মুথ GPU অ্যানিমেশন) ========== */
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 290px;
+            max-width: 85vw;
+            height: 100vh;
+            background: white;
+            z-index: 1000;
+            transform: translateX(100%);
+            -webkit-transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            will-change: transform;
+            backface-visibility: hidden;
+            box-shadow: -3px 0 15px rgba(0,0,0,0.18);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .drawer.active {
+            transform: translateX(0);
+            -webkit-transform: translateX(0);
+        }
+
+        .drawer-header {
+            background: #1a472a;
+            color: white;
+            padding: 1.5rem 1rem 1.2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .drawer-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 1.4rem;
+            color: #ffd700;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -79,85 +169,63 @@
             background: rgba(255,255,255,0.1);
         }
 
-        /* ========== ড্রয়ার মেনু ========== */
-        .drawer {
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 280px;
-            height: 100vh;
-            background: white;
-            z-index: 1000;
-            transition: right 0.3s ease;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-            overflow-y: auto;
-        }
-
-        .drawer.active {
-            right: 0;
-        }
-
-        .drawer-header {
-            background: #1a472a;
-            color: white;
-            padding: 1.5rem 1rem;
-            text-align: center;
-        }
-
-        .drawer-header i {
-            font-size: 3rem;
-            color: #ffd700;
+        .drawer-header-logo-box {
             margin-bottom: 0.5rem;
         }
 
+        .drawer-header-logo-box img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffd700;
+        }
+
+        .drawer-header-logo-box i {
+            font-size: 2.8rem;
+            color: #ffd700;
+        }
+
         .drawer-header h3 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
+            line-height: 1.4;
         }
 
         .drawer-menu {
             list-style: none;
-            padding: 1rem 0;
+            padding: 0.8rem 0;
         }
 
         .drawer-menu li {
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #f2f2f2;
         }
 
         .drawer-menu a {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 1rem 1.2rem;
+            padding: 0.85rem 1.2rem;
             color: #333;
             text-decoration: none;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
         }
 
         .drawer-menu a:hover,
         .drawer-menu a.active {
-            background: rgba(26, 71, 42, 0.1);
+            background: rgba(26, 71, 42, 0.08);
             color: #1a472a;
         }
 
         .drawer-menu a i {
             width: 20px;
-            color: #ffd700;
+            color: #1a472a;
         }
 
         .drawer-footer {
             padding: 1rem;
             border-top: 1px solid #eee;
             text-align: center;
-        }
-
-        .drawer-footer .user-info {
-            display: none;
-            margin-bottom: 1rem;
-        }
-
-        .drawer-footer .user-info.active {
-            display: block;
         }
 
         .drawer-footer .btn {
@@ -175,46 +243,122 @@
             bottom: 0;
             background: rgba(0,0,0,0.5);
             z-index: 999;
+            backdrop-filter: blur(2px);
         }
 
         .drawer-overlay.active {
             display: block;
         }
 
-        /* ========== নিউজ টিকার ========== */
+        /* ========== স্লিম নামাজের সময়সূচী বার ========== */
+        .prayer-times-bar {
+            background: linear-gradient(90deg, #0d2818 0%, #1a472a 50%, #0d2818 100%);
+            padding: 0.35rem 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            white-space: nowrap;
+            scrollbar-width: none;
+        }
+
+        .prayer-times-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .prayer-times-inner {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: nowrap;
+            max-width: 100%;
+            margin: 0 auto;
+            width: max-content;
+        }
+
+        @media (min-width: 768px) {
+            .prayer-times-inner {
+                justify-content: center;
+                width: 100%;
+            }
+        }
+
+        .prayer-label {
+            color: #ffd700;
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin-right: 0.2rem;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .prayer-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 0.18rem 0.5rem;
+            font-size: 0.7rem;
+            color: white;
+            white-space: nowrap;
+            border: 1px solid rgba(255,215,0,0.2);
+        }
+
+        .prayer-item.next-prayer {
+            background: rgba(255,215,0,0.22);
+            border-color: #ffd700;
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        .prayer-item i {
+            font-size: 0.62rem;
+            color: #ffd700;
+        }
+
+        .prayer-date-hijri {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.68rem;
+            margin-left: 0.4rem;
+            white-space: nowrap;
+        }
+
+        /* ========== নিউজ টিকার (সাব-পিক্সেল GPU অপ্টিমাইজড) ========== */
         .news-ticker {
             background: #ffd700;
             color: #1a472a;
-            padding: 0.8rem;
+            padding: 0.6rem 0.8rem;
             overflow: hidden;
             white-space: nowrap;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
         }
 
         .news-ticker-content {
             display: inline-block;
             white-space: nowrap;
+            will-change: transform;
         }
 
-        /* ========== হিরো সেকশন — উন্নত ========== */
+        /* ========== হিরো সেকশন ========== */
         .hero {
             background: linear-gradient(160deg, rgba(10,30,15,0.92) 0%, rgba(26,71,42,0.88) 50%, rgba(15,40,20,0.93) 100%),
                         url('https://images.unsplash.com/photo-1564769662533-4f00a87b4056?auto=format&fit=crop&w=1400&q=80');
             background-size: cover;
             background-position: center;
-            min-height: 480px;
+            min-height: 460px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
-            padding: 3rem 1rem;
+            padding: 2.5rem 1rem;
             position: relative;
             overflow: hidden;
         }
 
-        /* ইসলামিক জ্যামিতিক প্যাটার্ন */
         .hero::before {
             content: '';
             position: absolute;
@@ -241,60 +385,48 @@
 
         .hero-bismillah {
             font-family: 'Amiri', serif;
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             color: #ffd700;
-            margin-bottom: 0.6rem;
-            text-shadow: 0 0 20px rgba(255,215,0,0.6), 0 2px 8px rgba(0,0,0,0.8);
+            margin-bottom: 0.5rem;
             display: block;
-            animation: glowPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { text-shadow: 0 0 20px rgba(255,215,0,0.6), 0 2px 8px rgba(0,0,0,0.8); }
-            50%       { text-shadow: 0 0 35px rgba(255,215,0,0.9), 0 2px 12px rgba(0,0,0,0.9); }
         }
 
         .hero-content h1 {
-            font-size: 1.85rem;
+            font-size: 1.75rem;
             margin-bottom: 0.8rem;
-            font-family: 'Noto Sans Bengali', sans-serif;
             font-weight: 800;
-            line-height: 1.5;
+            line-height: 1.45;
             color: #ffffff;
-            text-shadow: 0 0 30px rgba(255,255,255,0.4), 2px 2px 0px rgba(0,0,0,0.9), 0 4px 15px rgba(0,0,0,0.8);
-            letter-spacing: 0.3px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
         }
 
         .hero-tagline {
-            font-size: 1rem;
+            font-size: 0.95rem;
             margin-bottom: 0.8rem;
             color: #ffffff;
             font-weight: 600;
             background: rgba(255,215,0,0.18);
             border-left: 3px solid #ffd700;
-            padding: 0.4rem 0.9rem;
+            padding: 0.35rem 0.85rem;
             border-radius: 0 8px 8px 0;
             display: inline-block;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.6);
         }
 
         .hero-ayat {
-            background: linear-gradient(135deg, rgba(255,215,0,0.18), rgba(255,215,0,0.08));
-            border: 1px solid rgba(255,215,0,0.5);
+            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.06));
+            border: 1px solid rgba(255,215,0,0.45);
             border-radius: 12px;
-            padding: 1rem 1.2rem;
-            margin: 1rem 0 1.8rem;
+            padding: 0.9rem 1.1rem;
+            margin: 0.8rem 0 1.6rem;
             font-family: 'Amiri', serif;
             font-size: 1rem;
             color: #ffe88a;
-            line-height: 1.9;
-            box-shadow: 0 0 20px rgba(255,215,0,0.12), inset 0 1px 0 rgba(255,215,0,0.2);
-            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            line-height: 1.8;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -304,7 +436,7 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.85rem 2rem;
+            padding: 0.8rem 1.8rem;
             font-size: 0.95rem;
             font-weight: 700;
             background: linear-gradient(135deg, #ffd700, #e6b800);
@@ -312,21 +444,15 @@
             border: none;
             border-radius: 50px;
             box-shadow: 0 4px 15px rgba(255,215,0,0.35);
-            transition: all 0.3s ease;
-        }
-
-        .hero-content .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255,215,0,0.5);
+            transition: all 0.25s ease;
         }
 
         .btn-outline-hero {
             background: rgba(255,255,255,0.1);
             border: 2px solid rgba(255,255,255,0.75);
             color: white;
-            padding: 0.85rem 2rem;
+            padding: 0.8rem 1.8rem;
             border-radius: 50px;
-            font-family: 'Noto Sans Bengali', sans-serif;
             font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
@@ -334,185 +460,7 @@
             align-items: center;
             gap: 0.5rem;
             text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline-hero:hover {
-            background: rgba(255,255,255,0.2);
-            border-color: white;
-            transform: translateY(-2px);
-        }
-
-        /* ========== নামাজের সময়সূচী Widget ========== */
-        .prayer-times-bar {
-            background: linear-gradient(90deg, #0d2818 0%, #1a472a 50%, #0d2818 100%);
-            padding: 0.7rem 1rem;
-            overflow: hidden;
-        }
-
-        .prayer-times-inner {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .prayer-label {
-            color: #ffd700;
-            font-size: 0.78rem;
-            font-weight: 700;
-            margin-right: 0.3rem;
-            white-space: nowrap;
-        }
-
-        .prayer-item {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            background: rgba(255,255,255,0.08);
-            border-radius: 20px;
-            padding: 0.25rem 0.7rem;
-            font-size: 0.75rem;
-            color: white;
-            white-space: nowrap;
-            border: 1px solid rgba(255,215,0,0.2);
-        }
-
-        .prayer-item.next-prayer {
-            background: rgba(255,215,0,0.2);
-            border-color: #ffd700;
-            color: #ffd700;
-            font-weight: 600;
-        }
-
-        .prayer-item i {
-            font-size: 0.65rem;
-            color: #ffd700;
-        }
-
-        .prayer-date-hijri {
-            color: rgba(255,255,255,0.6);
-            font-size: 0.72rem;
-            margin-left: 0.5rem;
-            white-space: nowrap;
-        }
-
-        /* ========== দৈনিক আয়াত সেকশন ========== */
-        .daily-ayat-section {
-            background: linear-gradient(135deg, #f0f7f2 0%, #e8f5ec 100%);
-            padding: 2rem 1rem;
-            border-bottom: 3px solid #d4edda;
-        }
-
-        .ayat-card {
-            max-width: 750px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            padding: 1.8rem;
-            box-shadow: 0 8px 30px rgba(26,71,42,0.12);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ayat-card::before {
-            content: '❝';
-            position: absolute;
-            top: -0.5rem;
-            left: 1rem;
-            font-size: 5rem;
-            color: #1a472a;
-            opacity: 0.06;
-            font-family: serif;
-            line-height: 1;
-        }
-
-        .ayat-type-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .ayat-tab {
-            flex: 1;
-            padding: 0.5rem;
-            border: 2px solid #d4edda;
-            border-radius: 8px;
-            background: #f0f7f2;
-            color: #1a472a;
-            font-size: 0.82rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-align: center;
-            font-family: 'Noto Sans Bengali', sans-serif;
-            transition: all 0.2s;
-        }
-
-        .ayat-tab.active {
-            background: #1a472a;
-            color: #ffd700;
-            border-color: #1a472a;
-        }
-
-        .ayat-arabic {
-            font-family: 'Amiri', serif;
-            font-size: 1.6rem;
-            color: #0d2818;
-            text-align: right;
-            direction: rtl;
-            line-height: 2;
-            margin-bottom: 0.8rem;
-            padding: 0.5rem 0;
-            border-bottom: 1px dashed #d4edda;
-        }
-
-        .ayat-bangla {
-            font-size: 0.92rem;
-            color: #2c3e50;
-            line-height: 1.9;
-            margin-bottom: 0.5rem;
-        }
-
-        .ayat-source {
-            font-size: 0.78rem;
-            color: #1a472a;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .ayat-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1rem;
-        }
-
-        .ayat-nav button {
-            background: #1a472a;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 0.4rem 0.8rem;
-            font-size: 0.8rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .ayat-share {
-            background: none;
-            border: 1px solid #1a472a;
-            color: #1a472a;
-            border-radius: 8px;
-            padding: 0.4rem 0.8rem;
-            font-size: 0.8rem;
-            cursor: pointer;
+            transition: all 0.25s ease;
         }
 
         /* ========== সদস্য Dashboard ========== */
@@ -536,7 +484,7 @@
 
         .dashboard-header {
             background: linear-gradient(135deg, #1a472a, #2d6a4f);
-            padding: 1.5rem;
+            padding: 1.3rem;
             color: white;
             display: flex;
             align-items: center;
@@ -544,35 +492,28 @@
         }
 
         .dashboard-avatar {
-            width: 56px;
-            height: 56px;
+            width: 52px;
+            height: 52px;
             background: rgba(255,215,0,0.2);
             border: 2px solid #ffd700;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: #ffd700;
             flex-shrink: 0;
         }
 
-        .dashboard-user-info h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .dashboard-user-info p {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
+        .dashboard-user-info h3 { font-size: 1.05rem; font-weight: 700; }
+        .dashboard-user-info p { font-size: 0.8rem; opacity: 0.8; }
 
         .membership-badge {
             margin-left: auto;
             background: rgba(255,215,0,0.2);
             border: 1px solid #ffd700;
             color: #ffd700;
-            padding: 0.3rem 0.8rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 700;
@@ -586,44 +527,29 @@
         }
 
         .dash-stat {
-            padding: 1rem 0.5rem;
+            padding: 0.9rem 0.5rem;
             text-align: center;
             border-right: 1px solid #f0f0f0;
         }
 
         .dash-stat:last-child { border-right: none; }
+        .dash-stat-num { font-size: 1.3rem; font-weight: 800; color: #1a472a; }
+        .dash-stat-label { font-size: 0.72rem; color: #888; margin-top: 0.2rem; }
 
-        .dash-stat-num {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #1a472a;
-        }
-
-        .dash-stat-label {
-            font-size: 0.72rem;
-            color: #888;
-            margin-top: 0.2rem;
-        }
-
-        .dashboard-tabs {
-            display: flex;
-            border-bottom: 2px solid #f0f0f0;
-        }
+        .dashboard-tabs { display: flex; border-bottom: 2px solid #f0f0f0; }
 
         .dash-tab {
             flex: 1;
-            padding: 0.8rem 0.5rem;
+            padding: 0.75rem 0.5rem;
             text-align: center;
             font-size: 0.82rem;
             color: #888;
             cursor: pointer;
+            border: none;
+            background: none;
             border-bottom: 2px solid transparent;
             margin-bottom: -2px;
-            font-family: 'Noto Sans Bengali', sans-serif;
-            background: none;
-            border-top: none;
-            border-left: none;
-            border-right: none;
+            font-family: inherit;
         }
 
         .dash-tab.active {
@@ -650,8 +576,6 @@
             font-size: 0.85rem;
         }
 
-        .history-item:last-child { border-bottom: none; }
-
         .history-icon {
             width: 36px;
             height: 36px;
@@ -665,16 +589,10 @@
 
         .history-icon.donation { background: #d4edda; color: #155724; }
         .history-icon.payment { background: #cce5ff; color: #004085; }
-        .history-icon.event { background: #fff3cd; color: #856404; }
 
         .history-info { flex: 1; }
         .history-info strong { display: block; color: #333; font-size: 0.85rem; }
         .history-info small { color: #999; font-size: 0.75rem; }
-
-        .history-amount {
-            font-weight: 700;
-            font-size: 0.88rem;
-        }
 
         .status-badge-sm {
             font-size: 0.7rem;
@@ -685,7 +603,6 @@
 
         .badge-success { background: #d4edda; color: #155724; }
         .badge-pending { background: #fff3cd; color: #856404; }
-        .badge-info { background: #cce5ff; color: #004085; }
 
         .no-history-msg {
             text-align: center;
@@ -694,7 +611,74 @@
             font-size: 0.85rem;
         }
 
-        /* ========== সেকশন ========== */
+        /* ========== দৈনিক আয়াত সেকশন ========== */
+        .daily-ayat-section {
+            background: linear-gradient(135deg, #f0f7f2 0%, #e8f5ec 100%);
+            padding: 1.8rem 1rem;
+            border-bottom: 3px solid #d4edda;
+        }
+
+        .ayat-card {
+            max-width: 750px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 1.6rem;
+            box-shadow: 0 8px 30px rgba(26,71,42,0.1);
+            position: relative;
+        }
+
+        .ayat-type-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.2rem; }
+
+        .ayat-tab {
+            flex: 1;
+            padding: 0.45rem;
+            border: 2px solid #d4edda;
+            border-radius: 8px;
+            background: #f0f7f2;
+            color: #1a472a;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            font-family: inherit;
+        }
+
+        .ayat-tab.active { background: #1a472a; color: #ffd700; border-color: #1a472a; }
+
+        .ayat-arabic {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            color: #0d2818;
+            text-align: right;
+            direction: rtl;
+            line-height: 1.9;
+            margin-bottom: 0.8rem;
+            padding: 0.4rem 0;
+            border-bottom: 1px dashed #d4edda;
+        }
+
+        .ayat-bangla { font-size: 0.92rem; color: #2c3e50; line-height: 1.8; margin-bottom: 0.5rem; }
+        .ayat-source { font-size: 0.78rem; color: #1a472a; font-weight: 600; display: flex; align-items: center; gap: 0.3rem; }
+
+        .ayat-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+
+        .ayat-nav button {
+            background: #1a472a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .ayat-share { background: none; border: 1px solid #1a472a; color: #1a472a; border-radius: 8px; padding: 0.4rem 0.8rem; font-size: 0.8rem; cursor: pointer; }
+
+        /* ========== কমন সেকশন ========== */
         .section {
             padding: 2.5rem 1rem;
             max-width: 1200px;
@@ -704,7 +688,7 @@
         .section-title {
             text-align: center;
             margin-bottom: 2rem;
-            font-size: 1.8rem;
+            font-size: 1.75rem;
             color: #1a472a;
             position: relative;
             padding-bottom: 0.8rem;
@@ -716,399 +700,235 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 75px;
             height: 3px;
             background: #ffd700;
         }
 
-        /* ========== স্ট্যাটিস্টিক্স কার্ড ========== */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
+        /* স্ট্যাটিস্টিক্স */
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1.2rem; }
 
         .stat-card {
             background: white;
             border-radius: 12px;
-            padding: 1.2rem;
+            padding: 1.1rem;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
         }
 
-        .stat-card i {
-            font-size: 2rem;
-            color: #1a472a;
-            margin-bottom: 0.5rem;
-        }
+        .stat-card i { font-size: 1.8rem; color: #1a472a; margin-bottom: 0.4rem; }
+        .stat-card h3 { font-size: 1.4rem; color: #1a472a; margin-bottom: 0.2rem; }
+        .stat-card p { font-size: 0.85rem; color: #666; }
 
-        .stat-card h3 {
-            font-size: 1.5rem;
-            color: #1a472a;
-            margin-bottom: 0.3rem;
-        }
+        /* নিউজ গ্রিড */
+        .news-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
 
-        .stat-card p {
-            font-size: 0.9rem;
-            color: #666;
-        }
+        .news-item { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+        .news-item img { width: 100%; height: 180px; object-fit: cover; }
+        .news-content { padding: 1.2rem; }
+        .news-date { color: #ffd700; font-size: 0.8rem; margin-bottom: 0.4rem; font-weight: 600; }
+        .news-content h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #1a472a; }
+        .news-content p { font-size: 0.88rem; color: #666; margin-bottom: 0.8rem; }
 
-        /* ========== নিউজ গ্রিড ========== */
-        .news-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.2rem;
-        }
+        /* গ্যালারি */
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
 
-        .news-item {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .news-item img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .news-content {
-            padding: 1.2rem;
-        }
-
-        .news-date {
-            color: #ffd700;
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .news-content h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: #1a472a;
-        }
-
-        .news-content p {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 0.8rem;
-        }
-
-        .read-more {
-            color: #1a472a;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        /* ========== ইভেন্ট ক্যালেন্ডার ========== */
-        #calendar {
-            background: white;
-            padding: 1rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        /* ========== গ্যালারি গ্রিড ========== */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.8rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-            aspect-ratio: 1;
-            cursor: pointer;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
+        .gallery-item { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 1; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .gallery-item:hover img { transform: scale(1.08); }
 
         .gallery-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: white;
-            padding: 0.5rem;
-            font-size: 0.8rem;
+            color: white; padding: 0.5rem; font-size: 0.8rem;
         }
 
-        /* ========== পেমেন্ট সেকশন ========== */
-        .payment-section {
-            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
-            color: white;
-            padding: 2.5rem 1rem;
-        }
-
-        .payment-cards {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            max-width: 400px;
-            margin: 1.5rem auto;
-        }
-
-        .payment-card {
-            background: rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
+        /* ========== দান সেকশন ========== */
+        .donate-hero {
+            background: linear-gradient(135deg, #0d2e18 0%, #1a472a 50%, #2d6a4f 100%);
+            padding: 3rem 1rem;
             text-align: center;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,215,0,0.3);
+            color: white;
+            position: relative;
         }
 
-        .payment-card i {
-            font-size: 2.5rem;
-            color: #ffd700;
-            margin-bottom: 0.5rem;
-        }
+        .donate-hero h2 { font-family: 'Amiri', serif; font-size: 2rem; margin-bottom: 0.5rem; }
+        .donate-hero p { font-size: 0.95rem; opacity: 0.85; margin-bottom: 1.8rem; }
 
-        .payment-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .payment-amount {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ffd700;
-            margin: 0.5rem 0;
-        }
-
-        /* ========== পেমেন্ট মেথড ========== */
-        .payment-methods {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.8rem;
-            margin: 1.5rem 0;
-        }
-
-        .payment-method {
+        .donate-box {
             background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 1rem;
+            border-radius: 20px;
+            padding: 1.8rem 1.4rem;
+            max-width: 480px;
+            margin: 0 auto;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+            color: #2c3e50;
+        }
+
+        .donate-box h3 { color: #1a472a; font-size: 1.25rem; margin-bottom: 1.3rem; text-align: center; }
+
+        .amount-presets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1rem; }
+
+        .amount-preset {
+            background: #f0f7f4;
+            border: 2px solid #d4edda;
+            border-radius: 10px;
+            padding: 0.75rem 0.3rem;
             text-align: center;
             cursor: pointer;
+            font-weight: 600;
+            color: #1a472a;
+            font-family: inherit;
+            user-select: none;
+            transition: all 0.2s ease;
         }
 
-        .payment-method.selected {
+        .amount-preset:hover, .amount-preset.selected {
+            background: #1a472a;
+            color: white;
             border-color: #1a472a;
-            background: rgba(26, 71, 42, 0.1);
         }
 
-        .payment-method img {
-            width: 60px;
-            height: 30px;
-            object-fit: contain;
+        .donate-amount-input {
+            width: 100%;
+            padding: 0.85rem;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            color: #1a472a;
+            font-family: inherit;
+            margin-bottom: 1rem;
+            outline: none;
         }
 
-        /* ========== ফর্ম এলিমেন্টস ========== */
-        .form-container {
+        .donate-amount-input:focus { border-color: #1a472a; }
+
+        .donate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1a472a, #2d6a4f);
+            color: white;
+            padding: 0.95rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26,71,42,0.35);
+        }
+
+        /* দান ইতিহাস */
+        .donation-history-section { background: #f8f9fa; padding: 2.5rem 1rem; }
+
+        .donation-feed { max-width: 700px; margin: 0 auto; }
+
+        .donation-item {
             background: white;
             border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 0.9rem 1.1rem;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border-left: 4px solid #1a472a;
         }
 
-        .form-group {
-            margin-bottom: 1.2rem;
+        .donation-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1a472a, #2d6a4f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd700;
+            font-size: 1.05rem;
+            flex-shrink: 0;
+            font-weight: 700;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.3rem;
+        .donation-info { flex: 1; }
+        .donation-info strong { display: block; color: #1a472a; font-size: 0.92rem; }
+        .donation-info small { color: #888; font-size: 0.78rem; }
+        .donation-note { color: #555; font-size: 0.78rem; font-style: italic; margin-top: 0.2rem; }
+
+        .donation-amount-badge {
+            background: #d4edda;
             color: #1a472a;
-            font-weight: 500;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 700;
             font-size: 0.9rem;
+            white-space: nowrap;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        /* ========== ফর্ম ও বাটন ========== */
+        .form-group { margin-bottom: 1.1rem; }
+        .form-group label { display: block; margin-bottom: 0.3rem; color: #1a472a; font-weight: 500; font-size: 0.88rem; }
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.75rem;
             border: 1px solid #ddd;
             border-radius: 8px;
-            font-family: 'Noto Sans Bengali', sans-serif;
-            font-size: 1rem;
+            font-family: inherit;
+            font-size: 0.95rem;
         }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #1a472a;
-        }
+        .form-group input:focus { outline: none; border-color: #1a472a; }
 
         .btn {
             background: #1a472a;
             color: white;
-            padding: 0.8rem 1.5rem;
+            padding: 0.75rem 1.4rem;
             border: none;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             width: 100%;
-            font-family: 'Noto Sans Bengali', sans-serif;
+            font-family: inherit;
         }
 
-        .btn:hover {
-            background: #ffd700;
-            color: #1a472a;
-        }
+        .btn:hover { background: #ffd700; color: #1a472a; }
+        .btn-small { padding: 0.5rem 0.9rem; font-size: 0.88rem; width: auto; }
 
-        .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: 0.9rem;
-            width: auto;
-        }
-
-        /* ========== লাইভ চ্যাট ========== */
-        .chat-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: #1a472a;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 90;
-            font-size: 1.2rem;
-        }
-
-        .chat-widget {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 300px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            z-index: 91;
-            display: none;
-        }
-
-        .chat-widget.active {
-            display: block;
-        }
-
-        .chat-header {
-            background: #1a472a;
-            color: white;
-            padding: 1rem;
-            border-radius: 12px 12px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chat-messages {
-            height: 300px;
-            padding: 1rem;
-            overflow-y: auto;
-            background: #f8f9fa;
-        }
-
-        .message {
-            margin-bottom: 1rem;
-            max-width: 80%;
-        }
-
-        .message.sent {
-            margin-left: auto;
-        }
-
-        .message-content {
-            padding: 0.5rem 1rem;
-            border-radius: 15px;
-            background: #e9ecef;
-            font-size: 0.9rem;
-        }
-
-        .message.sent .message-content {
-            background: #1a472a;
-            color: white;
-        }
-
-        .chat-input-area {
-            display: flex;
-            gap: 0.5rem;
-            padding: 0.8rem;
-            border-top: 1px solid #ddd;
-        }
-
-        .chat-input-area input {
-            flex: 1;
-            padding: 0.6rem;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-        }
-
-        /* ========== নোটিফিকেশন ব্যাজ ========== */
-        .notification-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #ff4444;
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 0.7rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* ========== মডাল ========== */
+        /* ========== মডাল (জ-ইনডেক্স ২০০০) ========== */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.65);
+            z-index: 2000; /* ড্রয়ারের উপরে থাকবে */
             align-items: center;
             justify-content: center;
             padding: 1rem;
+            backdrop-filter: blur(3px);
         }
 
-        .modal.active {
-            display: flex;
-        }
+        .modal.active { display: flex; }
 
         .modal-content {
             background: white;
             padding: 1.5rem;
-            border-radius: 15px;
-            max-width: 400px;
+            border-radius: 16px;
+            max-width: 440px;
             width: 100%;
-            max-height: 80vh;
+            max-height: 88vh;
             overflow-y: auto;
+            position: relative;
         }
 
         .modal-header {
@@ -1120,324 +940,61 @@
             border-bottom: 1px solid #eee;
         }
 
-        .modal-close {
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+        .modal-close { font-size: 1.6rem; cursor: pointer; color: #666; line-height: 1; }
 
-        /* ========== ফুটার ========== */
-        .footer {
-            background: #0a1f12;
-            color: white;
-            padding: 2rem 1rem 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-section h3 {
-            color: #ffd700;
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .footer-section a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 0.8rem;
-        }
-
-        .social-links a {
-            width: 35px;
-            height: 35px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: #ffd700;
-            color: #1a472a;
-        }
-
-        .copyright {
-            text-align: center;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.9rem;
-        }
-
-        /* ========== দান সেকশন ========== */
-        .donate-hero {
-            background: linear-gradient(135deg, #0d2e18 0%, #1a472a 50%, #2d6a4f 100%);
-            padding: 3rem 1rem;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        .donate-hero::before {
-            content: '❤';
-            position: absolute;
-            font-size: 15rem;
-            opacity: 0.04;
-            top: -3rem;
-            right: -2rem;
-        }
-        .donate-hero h2 {
-            font-family: 'Amiri', serif;
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        .donate-hero p {
-            font-size: 1rem;
-            opacity: 0.85;
-            margin-bottom: 2rem;
-        }
-        .donate-box {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem 1.5rem;
-            max-width: 480px;
-            margin: 0 auto;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            color: #2c3e50;
-        }
-        .donate-box h3 {
-            color: #1a472a;
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-        .amount-presets {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        .amount-preset {
-            background: #f0f7f4;
-            border: 2px solid #d4edda;
-            border-radius: 10px;
-            padding: 0.8rem 0.4rem;
-            text-align: center;
-            cursor: pointer;
-            font-weight: 600;
-            color: #1a472a;
-            transition: all 0.2s ease;
-            font-family: 'Noto Sans Bengali', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-            user-select: none;
-            min-height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .amount-preset:hover, .amount-preset.selected {
+        /* লাইভ চ্যাট */
+        .chat-toggle {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            width: 48px; height: 48px;
             background: #1a472a;
             color: white;
-            border-color: #1a472a;
-        }
-        .donate-amount-input {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            text-align: center;
-            color: #1a472a;
-            font-family: 'Noto Sans Bengali', sans-serif;
-            margin-bottom: 1rem;
-            outline: none;
-        }
-        .donate-amount-input:focus {
-            border-color: #1a472a;
-        }
-        .donate-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #1a472a, #2d6a4f);
-            color: white;
-            padding: 1rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: 'Noto Sans Bengali', sans-serif;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        .donate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(26,71,42,0.4);
-        }
-        .donate-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .provider-loading {
-            display: none;
-            text-align: center;
-            padding: 1rem;
-            color: #1a472a;
-            font-size: 0.9rem;
-        }
-        .provider-loading.active { display: block; }
-
-        /* ========== দান ইতিহাস (পাবলিক) ========== */
-        .donation-history-section {
-            background: #f8f9fa;
-            padding: 2.5rem 1rem;
-        }
-        .donation-history-section .section-title {
-            color: #1a472a;
-        }
-        .donation-feed {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .donation-item {
-            background: white;
-            border-radius: 12px;
-            padding: 1rem 1.2rem;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-            border-left: 4px solid #1a472a;
-            animation: fadeSlide 0.4s ease;
-        }
-        @keyframes fadeSlide {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .donation-avatar {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(135deg, #1a472a, #2d6a4f);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffd700;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-        .donation-info {
-            flex: 1;
-        }
-        .donation-info strong {
-            display: block;
-            color: #1a472a;
-            font-size: 0.95rem;
-        }
-        .donation-info small {
-            color: #888;
-            font-size: 0.8rem;
-        }
-        .donation-note {
-            color: #1a472a;
-            font-size: 0.78rem;
-            font-style: italic;
-            margin-top: 0.25rem;
-            opacity: 0.85;
-            line-height: 1.4;
-        }
-        .donation-amount-badge {
-            background: #d4edda;
-            color: #1a472a;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            white-space: nowrap;
-        }
-        .no-donations-msg {
-            text-align: center;
-            color: #888;
-            padding: 2rem;
-            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+            z-index: 90;
+            font-size: 1.2rem;
         }
 
-        /* ========== মিডিয়া ক্যোয়ারী - ট্যাবলেট ========== */
+        .chat-widget {
+            position: fixed;
+            bottom: 78px; right: 20px;
+            width: 290px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 91;
+            display: none;
+        }
+        .chat-widget.active { display: block; }
+        .chat-header { background: #1a472a; color: white; padding: 0.8rem 1rem; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; font-weight: 600; }
+        .chat-messages { height: 260px; padding: 0.8rem; overflow-y: auto; background: #f8f9fa; }
+        .message { margin-bottom: 0.8rem; max-width: 85%; }
+        .message.sent { margin-left: auto; }
+        .message-content { padding: 0.45rem 0.8rem; border-radius: 12px; background: #e9ecef; font-size: 0.85rem; }
+        .message.sent .message-content { background: #1a472a; color: white; }
+        .chat-input-area { display: flex; gap: 0.4rem; padding: 0.6rem; border-top: 1px solid #ddd; }
+        .chat-input-area input { flex: 1; padding: 0.5rem 0.8rem; border: 1px solid #ddd; border-radius: 20px; font-size: 0.85rem; }
+
+        /* ফুটার */
+        .footer { background: #0a1f12; color: white; padding: 2rem 1rem 1rem; }
+        .footer-content { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .footer-section h3 { color: #ffd700; font-size: 1.05rem; margin-bottom: 0.8rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 0.4rem; font-size: 0.88rem; }
+        .footer-section a { color: white; text-decoration: none; }
+        .social-links { display: flex; gap: 0.8rem; margin-top: 0.8rem; }
+        .social-links a { width: 34px; height: 34px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; }
+        .copyright { text-align: center; margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem; }
+
         @media (min-width: 768px) {
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-content p {
-                font-size: 1.2rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-
-            .news-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .payment-cards {
-                grid-template-columns: repeat(3, 1fr);
-                max-width: none;
-            }
-
-            .footer-content {
-                grid-template-columns: 200px 1fr;
-            }
-        }
-
-        /* ========== মিডিয়া ক্যোয়ারী - ডেস্কটপ ========== */
-        @media (min-width: 1024px) {
-            .news-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-
-            .footer-content {
-                grid-template-columns: 200px 1fr;
-            }
+            .stats-grid { grid-template-columns: repeat(4, 1fr); }
+            .news-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+            .footer-content { grid-template-columns: 200px 1fr; }
         }
     </style>
 </head>
@@ -1445,9 +1002,11 @@
     <!-- ========== হেডার ========== -->
     <header class="header">
         <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-mosque"></i>
-                <span>নারায়নপুর যুবসমাজ</span>
+            <div class="logo" id="siteHeaderLogo">
+                <div class="logo-img-wrapper" id="siteHeaderIconWrapper">
+                    <i class="fas fa-mosque" id="siteHeaderIcon"></i>
+                </div>
+                <span class="logo-text" id="siteHeaderTitle">নারায়নপুর যুবসমাজ</span>
             </div>
             
             <div class="menu-toggle" id="menuToggle" onclick="toggleDrawer()">
@@ -1459,34 +1018,42 @@
     <!-- ========== ড্রয়ার মেনু ========== -->
     <div class="drawer" id="drawer">
         <div class="drawer-header">
-            <i class="fas fa-mosque"></i>
-            <h3>নারায়নপুর যুব সমাজ</h3>
+            <div class="drawer-close-btn" onclick="closeDrawer()">&times;</div>
+            <div class="drawer-header-logo-box" id="drawerLogoBox">
+                <i class="fas fa-mosque" id="drawerMosqueIcon"></i>
+            </div>
+            <h3 id="drawerSiteTitle">নারায়নপুর যুব সমাজ</h3>
             <p id="drawerUserStatus" style="font-size: 0.8rem; margin-top: 0.3rem;">অতিথি</p>
         </div>
         
         <ul class="drawer-menu">
-            <li><a href="#home" onclick="closeDrawer(); scrollToSection('home');"><i class="fas fa-home"></i> হোম</a></li>
-            <li id="dashboardMenuLink" style="display:none;"><a href="#" onclick="closeDrawer(); scrollToSection('memberDashboard');"><i class="fas fa-tachometer-alt" style="color:#ffd700;"></i> আমার Dashboard</a></li>
+            <li><a href="#home" onclick="scrollToSection('home');"><i class="fas fa-home"></i> হোম</a></li>
+            <li id="dashboardMenuLink" style="display:none;"><a href="#" onclick="scrollToSection('memberDashboard');"><i class="fas fa-tachometer-alt" style="color:#ffd700;"></i> আমার Dashboard</a></li>
             
-            <!-- সদস্য লিস্ট সাব-মেনু (নতুন যুক্ত) -->
+            <!-- ৭. ভারপ্রাপ্ত কমিটি বৃন্দ (নতুন যুক্ত - সদস্য লিস্টের উপরে) -->
+            <li>
+                <a href="#" onclick="openCommitteeModal(); return false;"><i class="fas fa-user-shield"></i> ভারপ্রাপ্ত কমিটি বৃন্দ</a>
+            </li>
+
+            <!-- সদস্য লিস্ট সাব-মেনু (ক্লিক করলে ড্রয়ার ব্যাকগ্রাউন্ডে থাকবে) -->
             <li>
                 <a href="#" onclick="toggleSubMenu('memberSubMenu'); return false;"><i class="fas fa-users"></i> সদস্য লিস্ট <i class="fas fa-chevron-down" style="margin-left:auto;font-size:0.8rem;"></i></a>
                 <ul id="memberSubMenu" style="display:none; list-style:none; background: #f8f9fa; border-left: 3px solid #1a472a; padding-left: 10px;">
-                    <li><a href="#" onclick="openMemberListModal('সাধারণ')" style="font-size:0.9rem; padding:0.6rem 1rem;"><i class="fas fa-user"></i> সাধারণ সদস্য</a></li>
-                    <li><a href="#" onclick="openMemberListModal('কার্যকরী')" style="font-size:0.9rem; padding:0.6rem 1rem;"><i class="fas fa-user-tie"></i> কার্যকরী সদস্য</a></li>
-                    <li><a href="#" onclick="openMemberListModal('প্রবাসী')" style="font-size:0.9rem; padding:0.6rem 1rem;"><i class="fas fa-plane"></i> প্রবাসী সদস্য</a></li>
+                    <li><a href="#" onclick="openMemberListModal('সাধারণ'); return false;" style="font-size:0.9rem; padding:0.6rem 1rem;"><i class="fas fa-user"></i> সাধারণ সদস্য</a></li>
+                    <li><a href="#" onclick="openMemberListModal('কার্যকরী'); return false;" style="font-size:0.9rem; padding:0.6rem 1rem;"><i class="fas fa-user-tie"></i> কার্যকরী সদস্য</a></li>
+                    <li><a href="#" onclick="openMemberListModal('প্রবাসী'); return false;" style="font-size:0.9rem; padding:0.6rem 1rem;"><i class="fas fa-plane"></i> প্রবাসী সদস্য</a></li>
                 </ul>
             </li>
             
-            <!-- মাসিক দান বাটন (নতুন যুক্ত) -->
-            <li><a href="#" onclick="openMonthlyDonationModal(); closeDrawer();"><i class="fas fa-list-alt"></i> মাসিক দান</a></li>
+            <!-- মাসিক দান বাটন -->
+            <li><a href="#" onclick="openMonthlyDonationModal(); return false;"><i class="fas fa-list-alt"></i> মাসিক দান</a></li>
 
-            <li><a href="#about" onclick="closeDrawer(); scrollToSection('about');"><i class="fas fa-info-circle"></i> আমাদের সম্পর্কে</a></li>
-            <li><a href="#news" onclick="closeDrawer(); scrollToSection('news');"><i class="fas fa-newspaper"></i> সংবাদ</a></li>
-            <li><a href="#events" onclick="closeDrawer(); scrollToSection('events');"><i class="fas fa-calendar"></i> সাংগঠনিক কার্যকলাপ</a></li>
-            <li><a href="#gallery" onclick="closeDrawer(); scrollToSection('gallery');"><i class="fas fa-images"></i> গ্যালারি</a></li>
-            <li><a href="#payment" onclick="closeDrawer(); scrollToSection('payment');"><i class="fas fa-hand-holding-heart"></i> দান করুন</a></li>
-            <li><a href="#contact" onclick="closeDrawer(); scrollToSection('contact');"><i class="fas fa-phone"></i> যোগাযোগ</a></li>
+            <li><a href="#about" onclick="scrollToSection('about');"><i class="fas fa-info-circle"></i> আমাদের সম্পর্কে</a></li>
+            <li><a href="#news" onclick="scrollToSection('news');"><i class="fas fa-newspaper"></i> সংবাদ</a></li>
+            <li><a href="#events" onclick="scrollToSection('events');"><i class="fas fa-calendar"></i> সাংগঠনিক কার্যকলাপ</a></li>
+            <li><a href="#gallery" onclick="scrollToSection('gallery');"><i class="fas fa-images"></i> গ্যালারি</a></li>
+            <li><a href="#payment" onclick="scrollToSection('payment');"><i class="fas fa-hand-holding-heart"></i> দান করুন</a></li>
+            <li><a href="#contact" onclick="scrollToSection('contact');"><i class="fas fa-phone"></i> যোগাযোগ</a></li>
         </ul>
         
         <div class="drawer-footer">
@@ -1502,7 +1069,6 @@
                 </div>
                 <button class="btn btn-small" id="drawerLoginBtn" onclick="handleDrawerLogin()">লগইন</button>
                 
-                <!-- পাসওয়ার্ড ভুলে গেছেন (নতুন যুক্ত) -->
                 <p style="text-align: center; margin-top: 10px;">
                     <a href="#" onclick="resetPassword()" style="color: #1a472a; font-size: 0.85rem; text-decoration: underline;">পাসওয়ার্ড ভুলে গেছেন?</a>
                 </p>
@@ -1514,13 +1080,13 @@
             <div id="drawerUserInfo" style="display: none;">
                 <p id="drawerUserName"></p>
                 <button class="btn btn-small" onclick="logout()" style="width:100%; margin-bottom:0.5rem;"><i class="fas fa-sign-out-alt"></i> লগআউট</button>
-                <button class="btn btn-small" id="adminPanelBtn" style="display:none; width:100%; background:linear-gradient(135deg,#ffd700,#e6b800); color:#1a472a; font-weight:700; box-shadow:0 4px 12px rgba(255,215,0,0.4);" onclick="goToAdminPanel()"><i class="fas fa-user-shield"></i> অ্যাডমিন প্যানেলে যান</button>
+                <button class="btn btn-small" id="adminPanelBtn" style="display:none; width:100%; background:linear-gradient(135deg,#ffd700,#e6b800); color:#1a472a; font-weight:700;" onclick="goToAdminPanel()"><i class="fas fa-user-shield"></i> অ্যাডমিন প্যানেলে যান</button>
             </div>
         </div>
     </div>
     <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 
-    <!-- ========== নামাজের সময়সূচী বার ========== -->
+    <!-- ========== ৫. স্লিম নামাজের সময়সূচী বার ========== -->
     <div class="prayer-times-bar">
         <div class="prayer-times-inner">
             <span class="prayer-label"><i class="fas fa-mosque"></i> নামাজের সময়:</span>
@@ -1533,20 +1099,19 @@
         </div>
     </div>
 
-
-    <!-- ========== হিরো সেকশন — উন্নত ========== -->
-    <!-- ========== নিউজ টিকার ========== -->
+    <!-- ========== ৬. মসৃণ নিউজ টিকার ========== -->
     <div class="news-ticker">
         <div class="news-ticker-content" id="newsTickerContent">
             <i class="fas fa-star"></i> আসসালামু আলাইকুম! নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ সংগঠনের সকল কার্যক্রম সম্পর্কে জানতে আমাদের সাথেই থাকুন। 
         </div>
     </div>
 
+    <!-- ========== হিরো সেকশন ========== -->
     <section id="home" class="hero">
         <div class="hero-pattern"></div>
         <div class="hero-content">
             <span class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</span>
-            <h1>নারায়নপুর ইসলামী আইডিয়াল যুব সমাজে স্বাগতম</h1>
+            <h1 id="heroMainHeading">নারায়নপুর ইসলামী আইডিয়াল যুব সমাজে আপনাকে স্বাগতম</h1>
             <p class="hero-tagline">একটি সুন্দর ইসলামিক সমাজ গড়ার লক্ষ্যে আমরা একতাবদ্ধ</p>
             <div class="hero-ayat">
                 <span>وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ</span><br>
@@ -1559,6 +1124,7 @@
         </div>
     </section>
 
+    <!-- ========== সদস্য Dashboard ========== -->
     <div class="member-dashboard" id="memberDashboard">
         <div class="dashboard-card">
             <div class="dashboard-header">
@@ -1623,15 +1189,12 @@
                         <span id="profileJoined" style="font-size:0.85rem; font-weight:600; color:#333;"></span>
                     </div>
                 </div>
-                
-                <!-- প্রোফাইল আপডেট বাটন (নতুন যুক্ত) -->
                 <button class="btn btn-small" onclick="editProfilePrompt()" style="margin-top: 10px; width: 100%;">
                     <i class="fas fa-edit"></i> প্রোফাইল আপডেট করুন
                 </button>
             </div>
         </div>
     </div>
-
 
     <!-- ========== দৈনিক আয়াত ও হাদীস ========== -->
     <div class="daily-ayat-section">
@@ -1653,11 +1216,10 @@
         </div>
     </div>
 
-
     <!-- ========== স্ট্যাটিস্টিক্স ========== -->
     <section class="section" style="padding-top:1.5rem; padding-bottom:0.5rem;">
-        <h2 class="section-title" style="text-align:center; margin-bottom:1.2rem;">সংগঠনের সামগ্রিক তথ্য</h2>
-        <div class="stats-grid" style="margin-bottom:1rem;">
+        <h2 class="section-title">সংগঠনের সামগ্রিক তথ্য</h2>
+        <div class="stats-grid">
             <div class="stat-card">
                 <i class="fas fa-users"></i>
                 <h3 id="totalMembers">0</h3>
@@ -1679,7 +1241,7 @@
                 <p>সংবাদ আপডেট</p>
             </div>
         </div>
-        <div class="stats-grid" style="margin-bottom:1rem;">
+        <div class="stats-grid">
             <div class="stat-card" style="border-top:3px solid #28a745;">
                 <i class="fas fa-arrow-circle-up" style="color:#28a745;"></i>
                 <h3 id="totalIncome" style="color:#28a745;">0</h3>
@@ -1706,28 +1268,22 @@
     <!-- ========== নিউজ সেকশন ========== -->
     <section id="news" class="section">
         <h2 class="section-title">সর্বশেষ সংবাদ</h2>
-        <div id="newsContainer" class="news-grid">
-            <!-- ফায়ারবেস থেকে রিয়েল-টাইম লোড হবে -->
-        </div>
+        <div id="newsContainer" class="news-grid"></div>
     </section>
 
     <!-- ========== ইভেন্ট ক্যালেন্ডার সেকশন ========== -->
     <section id="events" class="section">
         <h2 class="section-title">সাংগঠনিক কার্যকলাপ</h2>
-        <div id="calendar">
-            <!-- ফায়ারবেস থেকে রিয়েল-টাইম লোড হবে -->
-        </div>
+        <div id="calendar"></div>
     </section>
 
     <!-- ========== গ্যালারি সেকশন ========== -->
     <section id="gallery" class="section">
         <h2 class="section-title">ফটো গ্যালারি</h2>
-        <div id="galleryContainer" class="gallery-grid">
-            <!-- ফায়ারবেস থেকে রিয়েল-টাইম লোড হবে -->
-        </div>
+        <div id="galleryContainer" class="gallery-grid"></div>
     </section>
 
-    <!-- ========== দান সেকশন ========== -->
+    <!-- ========== ৪. দান সেকশন ========== -->
     <section id="payment" class="donate-hero">
         <h2><i class="fas fa-hand-holding-heart" style="color: #ffd700;"></i> দান করুন</h2>
         <p>আল্লাহর পথে দান করুন, সওয়াব অর্জন করুন</p>
@@ -1744,36 +1300,31 @@
                 <div class="amount-preset" onclick="setDonateAmount(2000)">২০০০ ৳</div>
             </div>
 
-            <input type="number" id="donateAmount" class="donate-amount-input" placeholder="অথবা নিজে পরিমাণ লিখুন (৳)" min="10" oninput="clearPresetSelection()">
+            <input type="number" id="donateAmount" class="donate-amount-input" placeholder="পরিমাণ লিখুন (৳)" min="10" oninput="clearPresetSelection()">
 
-            <div class="form-group" style="margin-bottom: 1rem;">
-                <input type="text" id="donorName" placeholder="আপনার নাম (ঐচ্ছিক)" style="width:100%; padding:0.7rem; border:1px solid #ddd; border-radius:10px; font-family:'Noto Sans Bengali',sans-serif;">
+            <div class="form-group" style="margin-bottom: 0.8rem;">
+                <input type="text" id="donorName" placeholder="আপনার নাম" style="width:100%; padding:0.75rem; border:1px solid #ddd; border-radius:10px;">
             </div>
 
-            <div class="form-group" style="margin-bottom: 1rem;">
-                <input type="text" id="donateNote" placeholder="কি বিষয়ে দান করছেন? (ঐচ্ছিক, যেমন: মসজিদ নির্মাণ)" style="width:100%; padding:0.7rem; border:1px solid #ddd; border-radius:10px; font-family:'Noto Sans Bengali',sans-serif;">
+            <div class="form-group" style="margin-bottom: 1.2rem;">
+                <input type="text" id="donateNote" placeholder="কি বিষয়ে দান করছেন?" style="width:100%; padding:0.75rem; border:1px solid #ddd; border-radius:10px;">
             </div>
 
-            <button class="donate-btn" id="donateBtn" onclick="processDonation()">
-                <i class="fas fa-heart"></i> এখনই দান করুন
+            <!-- বাটনে ক্লিক করলে ইসলামিক চেকআউট মডাল ওপেন হবে -->
+            <button class="donate-btn" id="donateBtn" onclick="openIslamicCheckout()">
+                <i class="fas fa-heart"></i> দান সম্পূর্ণ করুন
             </button>
-            
-            <div class="provider-loading" id="providerLoading">
-                <i class="fas fa-spinner fa-spin"></i> পেমেন্ট পেজে যাচ্ছেন...
-            </div>
 
             <p style="text-align:center; margin-top:1rem; font-size:0.8rem; color:#888;">
-                <i class="fas fa-lock"></i> নিরাপদ পেমেন্ট গেটওয়ে দ্বারা সুরক্ষিত
+                <i class="fas fa-shield-alt" style="color:#1a472a;"></i> বিশ্বস্ত ও শতভাগ নিরাপদ ইসলামিক দান তহবিল
             </p>
         </div>
     </section>
 
     <!-- ========== পাবলিক দান ইতিহাস ========== -->
     <section class="donation-history-section">
-        <h2 class="section-title" style="text-align:center; margin-bottom:1.5rem;">সকল দানের ইতিহাস</h2>
-        <div class="donation-feed" id="donationHistoryFeed">
-            <!-- রিয়েল-টাইম লোড হবে -->
-        </div>
+        <h2 class="section-title">সকল দানের ইতিহাস</h2>
+        <div class="donation-feed" id="donationHistoryFeed"></div>
     </section>
 
     <!-- ========== লাইভ চ্যাট ========== -->
@@ -1784,14 +1335,132 @@
     <div class="chat-widget" id="chatWidget">
         <div class="chat-header">
             <span>লাইভ চ্যাট</span>
-            <i class="fas fa-minus" onclick="toggleChat()"></i>
+            <i class="fas fa-minus" onclick="toggleChat()" style="cursor:pointer;"></i>
         </div>
-        <div class="chat-messages" id="chatMessages">
-            <!-- চ্যাট মেসেজ দেখাবে -->
-        </div>
+        <div class="chat-messages" id="chatMessages"></div>
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="মেসেজ লিখুন...">
             <button class="btn-small" onclick="sendMessage()">পাঠান</button>
+        </div>
+    </div>
+
+    <!-- ========== ৪. ইসলামিক দান চেকআউট মডাল (নতুন) ========== -->
+    <div class="modal" id="islamicCheckoutModal">
+        <div class="modal-content" style="max-width: 500px; padding: 1.6rem;">
+            <div class="modal-header">
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <div style="width:34px; height:34px; background:#1a472a; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#ffd700;">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 style="color:#1a472a; font-size:1.15rem; margin:0;">দান চেকআউট (সাদাকাহ)</h3>
+                </div>
+                <span class="modal-close" onclick="closeModal('islamicCheckoutModal')">&times;</span>
+            </div>
+
+            <div id="checkoutStepForm">
+                <!-- ইসলামিক দোয়া ও আয়াত -->
+                <div style="background: linear-gradient(135deg, #f0f7f2, #e8f5ec); border-left: 4px solid #1a472a; padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1.1rem; text-align: center;">
+                    <div style="font-family:'Amiri',serif; font-size:1.25rem; color:#1a472a; margin-bottom:0.15rem;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+                    <div style="font-size:0.8rem; color:#2d6a4f; font-style:italic;">"সাদাকাহ পাপ মুছে দেয়, যেভাবে পানি আগুন নিভিয়ে দেয়।" — তিরমিযী</div>
+                </div>
+
+                <!-- দানের সারাংশ -->
+                <div style="background:#fafafa; border:1px solid #eee; border-radius:12px; padding:0.9rem; margin-bottom:1.1rem;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.35rem; font-size:0.88rem;">
+                        <span style="color:#666;">দাতার নাম:</span>
+                        <strong style="color:#1a472a;" id="checkoutDonorName">—</strong>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.35rem; font-size:0.88rem;">
+                        <span style="color:#666;">দানের খাত:</span>
+                        <span style="color:#333;" id="checkoutDonorNote">সাধারণ তহবিল</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px dashed #ddd; padding-top:0.4rem; margin-top:0.4rem;">
+                        <span style="color:#333; font-weight:600; font-size:0.9rem;">মোট দানের পরিমাণ:</span>
+                        <span style="font-size:1.25rem; font-weight:800; color:#1a472a;" id="checkoutDonorAmount">০ ৳</span>
+                    </div>
+                </div>
+
+                <!-- পেমেন্ট মেথড নির্বাচন -->
+                <div style="margin-bottom:1.1rem;">
+                    <label style="display:block; font-weight:600; font-size:0.85rem; color:#1a472a; margin-bottom:0.5rem;">
+                        <i class="fas fa-wallet"></i> দান প্রদানের মেথড নির্বাচন করুন:
+                    </label>
+                    <div id="checkoutMethodsContainer" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap:0.6rem;">
+                        <div style="text-align:center; padding:1rem; color:#888;"><i class="fas fa-spinner fa-spin"></i> মেথড লোড হচ্ছে...</div>
+                    </div>
+                </div>
+
+                <!-- নির্বাচিত মেথডের বিস্তারিত -->
+                <div id="selectedMethodDetails" style="display:none; background:#f4fbf6; border:1.5px solid #c3e6cb; border-radius:10px; padding:0.85rem; margin-bottom:1.1rem;">
+                    <!-- ডায়নামিক নম্বর ও নির্দেশিকা আসবে -->
+                </div>
+
+                <!-- ট্রানজেকশন তথ্য পূরণ -->
+                <div id="checkoutTxFields" style="display:none;">
+                    <div class="form-group" style="margin-bottom:0.75rem;">
+                        <label style="font-size:0.85rem; color:#333; font-weight:600;">যে নাম্বার থেকে টাকা পাঠিয়েছেন সেটি দিন  *</label>
+                        <input type="text" id="checkoutSenderPhone" placeholder="যেমন: 01xxxxxxxxx">
+                    </div>
+                    <div class="form-group" style="margin-bottom:1.1rem;">
+                        <label style="font-size:0.85rem; color:#333; font-weight:600;">ট্রানজেকশন আইডি (TrxID) *</label>
+                        <input type="text" id="checkoutTrxId" placeholder="যেমন: BL7A890K..." style="text-transform:uppercase;">
+                    </div>
+                    <button type="button" class="btn" id="confirmDonationBtn" onclick="submitIslamicDonation()" style="font-size:1rem; padding:0.85rem; border-radius:10px; background:linear-gradient(135deg, #1a472a, #2d6a4f); color:#ffd700; font-weight:700;">
+                        <i class="fas fa-check-circle"></i> দান নিশ্চিত করুন ও সওয়াব প্রার্থনা করুন
+                    </button>
+                </div>
+            </div>
+
+            <!-- জাযাকাল্লাহু খাইরান কনফার্মেশন স্ক্রিন -->
+            <div id="checkoutSuccessScreen" style="display:none; text-align:center; padding:1.2rem 0.4rem;">
+                <div style="width:64px; height:64px; background:#d4edda; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem; color:#28a745; font-size:2rem;">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div style="font-family:'Amiri',serif; font-size:1.7rem; color:#1a472a; margin-bottom:0.4rem;">جَزَاكَ ٱللَّٰهُ خَيْرًا</div>
+                <h4 style="color:#1a472a; margin-bottom:0.5rem; font-size:1.15rem;">আপনার দান সফলভাবে গৃহীত হয়েছে!</h4>
+                <p style="color:#555; font-size:0.88rem; line-height:1.6; margin-bottom:1.1rem;">
+                    আল্লাহ সুবহানাহু ওয়া তা'আলা আপনার এই দানকে কবুল করুন এবং আপনার রিজিক ও হায়াতে বরকত দান করুন। আমীন।
+                </p>
+                <div style="background:#f8f9fa; border-radius:10px; padding:0.75rem; font-size:0.82rem; color:#666; margin-bottom:1.1rem;">
+                    ভারপ্রাপ্ত কমিটি বৃন্দ যাচাই করার পর আপনার দানটি পাবলিক তালিকায় অনুমোদিত হিসেবে যোগ হবে।
+                </div>
+                <button class="btn" onclick="closeModal('islamicCheckoutModal')" style="max-width:180px; margin:0 auto;">ঠিক আছে</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ৭. ভারপ্রাপ্ত কমিটি বৃন্দ মডাল (নতুন) ========== -->
+    <div class="modal" id="committeeModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 style="color:#1a472a;"><i class="fas fa-user-shield" style="color:#ffd700;"></i> ভারপ্রাপ্ত কমিটি বৃন্দ</h3>
+                <span class="modal-close" onclick="closeModal('committeeModal')">&times;</span>
+            </div>
+            <div id="committeeListContent" style="padding: 0.5rem 0;">
+                <!-- ডাইনামিক কমিটি লিস্ট লোড হবে -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== সদস্য লিস্ট মডাল ========== -->
+    <div class="modal" id="memberListModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 id="memberListTitle">সদস্য তালিকা</h3>
+                <span class="modal-close" onclick="closeModal('memberListModal')">&times;</span>
+            </div>
+            <div id="memberListContent" style="padding: 0.5rem 0;"></div>
+        </div>
+    </div>
+
+    <!-- ========== মাসিক দান মডাল ========== -->
+    <div class="modal" id="monthlyDonationModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 id="monthlyDonationTitle">চলতি মাসের দান</h3>
+                <span class="modal-close" onclick="closeModal('monthlyDonationModal')">&times;</span>
+            </div>
+            <div id="monthlyDonationList" style="padding: 0.5rem 0;"></div>
         </div>
     </div>
 
@@ -1819,43 +1488,17 @@
                 <div class="form-group">
                     <div style="position:relative;">
                         <input type="password" id="regPassword" placeholder="পাসওয়ার্ড" required style="width:100%; padding-right:2.5rem;">
-                        <span onclick="togglePassVis('regPassword', this)" style="position:absolute;right:0.7rem;top:50%;transform:translateY(-50%);cursor:pointer;color:#888;font-size:0.95rem;"><i class="fas fa-eye"></i></span>
+                        <span onclick="togglePassVis('regPassword', this)" style="position:absolute;right:0.7rem;top:50%;transform:translateY(-50%);cursor:pointer;color:#888;"><i class="fas fa-eye"></i></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <div style="position:relative;">
                         <input type="password" id="regConfirmPassword" placeholder="পাসওয়ার্ড নিশ্চিত করুন" required style="width:100%; padding-right:2.5rem;">
-                        <span onclick="togglePassVis('regConfirmPassword', this)" style="position:absolute;right:0.7rem;top:50%;transform:translateY(-50%);cursor:pointer;color:#888;font-size:0.95rem;"><i class="fas fa-eye"></i></span>
+                        <span onclick="togglePassVis('regConfirmPassword', this)" style="position:absolute;right:0.7rem;top:50%;transform:translateY(-50%);cursor:pointer;color:#888;"><i class="fas fa-eye"></i></span>
                     </div>
                 </div>
                 <button type="submit" class="btn">নিবন্ধন সম্পন্ন করুন</button>
             </form>
-        </div>
-    </div>
-
-    <!-- ========== সদস্য লিস্ট মডাল (নতুন) ========== -->
-    <div class="modal" id="memberListModal">
-        <div class="modal-content" style="max-width: 600px;">
-            <div class="modal-header">
-                <h3 id="memberListTitle">সদস্য তালিকা</h3>
-                <span class="modal-close" onclick="closeModal('memberListModal')">&times;</span>
-            </div>
-            <div id="memberListContent" style="padding: 0.5rem 0;">
-                <!-- ডাইনামিক সদস্য লিস্ট লোড হবে -->
-            </div>
-        </div>
-    </div>
-
-    <!-- ========== মাসিক দান মডাল (নতুন) ========== -->
-    <div class="modal" id="monthlyDonationModal">
-        <div class="modal-content" style="max-width: 600px;">
-            <div class="modal-header">
-                <h3 id="monthlyDonationTitle">চলতি মাসের দান</h3>
-                <span class="modal-close" onclick="closeModal('monthlyDonationModal')">&times;</span>
-            </div>
-            <div id="monthlyDonationList" style="padding: 0.5rem 0;">
-                <!-- ডাইনামিক মাসিক দান লোড হবে -->
-            </div>
         </div>
     </div>
 
@@ -1896,14 +1539,14 @@
             </div>
         </div>
     </section>
-
+    
     <!-- ========== যোগাযোগ সেকশন ========== -->
     <section id="contact" class="section" style="background:white; padding:2.5rem 1rem;">
         <h2 class="section-title">যোগাযোগ করুন</h2>
         <div style="max-width:700px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:1.5rem;">
-            <div style="display:grid;grid-template-columns:1fr;gap:1rem;">
-                <div style="display:flex;align-items:center;gap:1rem;background:#f8f9fa;padding:1.2rem;border-radius:12px;">
-                    <div style="width:44px;height:44px;background:#1a472a;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <div style="display:grid;grid-template-columns:1fr;gap:0.8rem;">
+                <div style="display:flex;align-items:center;gap:1rem;background:#f8f9fa;padding:1.1rem;border-radius:12px;">
+                    <div style="width:42px;height:42px;background:#1a472a;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                         <i class="fas fa-map-marker-alt" style="color:#ffd700;"></i>
                     </div>
                     <div>
@@ -1911,8 +1554,8 @@
                         <div id="contactAddress" style="color:#555;font-size:0.85rem;">নারায়নপুর, গুরুদাসপুর, নাটোর, বাংলাদেশ</div>
                     </div>
                 </div>
-                <div style="display:flex;align-items:center;gap:1rem;background:#f8f9fa;padding:1.2rem;border-radius:12px;">
-                    <div style="width:44px;height:44px;background:#1a472a;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <div style="display:flex;align-items:center;gap:1rem;background:#f8f9fa;padding:1.1rem;border-radius:12px;">
+                    <div style="width:42px;height:42px;background:#1a472a;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                         <i class="fas fa-phone" style="color:#ffd700;"></i>
                     </div>
                     <div>
@@ -1920,8 +1563,8 @@
                         <div id="contactPhone" style="color:#555;font-size:0.85rem;"><a href="tel:+8801873011736" id="contactPhoneLink" style="color:#555;text-decoration:none;">+৮৮০১৮৭৩০১১৭৩৬</a></div>
                     </div>
                 </div>
-                <div style="display:flex;align-items:center;gap:1rem;background:#f8f9fa;padding:1.2rem;border-radius:12px;">
-                    <div style="width:44px;height:44px;background:#1a472a;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <div style="display:flex;align-items:center;gap:1rem;background:#f8f9fa;padding:1.1rem;border-radius:12px;">
+                    <div style="width:42px;height:42px;background:#1a472a;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                         <i class="fas fa-envelope" style="color:#ffd700;"></i>
                     </div>
                     <div>
@@ -1930,13 +1573,12 @@
                     </div>
                 </div>
             </div>
-            <!-- সোশ্যাল মিডিয়া -->
             <div style="text-align:center;padding:1.5rem;background:#f8f9fa;border-radius:12px;">
                 <h4 style="color:#1a472a;margin-bottom:1rem;">সোশ্যাল মিডিয়ায় আমাদের অনুসরণ করুন</h4>
                 <div style="display:flex;justify-content:center;gap:1rem;">
-                    <a href="#" id="socialFb" target="_blank" style="width:44px;height:44px;background:#1877f2;color:white;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:1.1rem;text-decoration:none;"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" id="socialYt" target="_blank" style="width:44px;height:44px;background:#ff0000;color:white;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:1.1rem;text-decoration:none;"><i class="fab fa-youtube"></i></a>
-                    <a href="#" id="socialWa" target="_blank" style="width:44px;height:44px;background:#25d366;color:white;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:1.1rem;text-decoration:none;"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" id="socialFb" target="_blank" style="width:42px;height:42px;background:#1877f2;color:white;border-radius:50%;display:none;align-items:center;justify-content:center;text-decoration:none;"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" id="socialYt" target="_blank" style="width:42px;height:42px;background:#ff0000;color:white;border-radius:50%;display:none;align-items:center;justify-content:center;text-decoration:none;"><i class="fab fa-youtube"></i></a>
+                    <a href="#" id="socialWa" target="_blank" style="width:42px;height:42px;background:#25d366;color:white;border-radius:50%;display:none;align-items:center;justify-content:center;text-decoration:none;"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
@@ -1945,7 +1587,6 @@
     <!-- ========== ফুটার ========== -->
     <footer class="footer">
         <div class="footer-content">
-            <!-- বাম দিক: দ্রুত লিঙ্ক -->
             <div class="footer-section">
                 <h3>দ্রুত লিঙ্ক</h3>
                 <ul>
@@ -1956,10 +1597,9 @@
                     <li><a href="#" onclick="scrollToSection('contact')"><i class="fas fa-chevron-right" style="font-size:0.7rem;margin-right:0.4rem;color:#ffd700;"></i>যোগাযোগ</a></li>
                 </ul>
             </div>
-            <!-- ডান দিক: সংগঠন তথ্য -->
             <div class="footer-section">
-                <h3>নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ</h3>
-                <p style="font-size: 0.9rem;">একটি অরাজনৈতিক ধর্মীয় সংগঠন। আমরা ইসলামের সঠিক বার্তা প্রচারে কাজ করি।</p>
+                <h3 id="footerOrgTitle">নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ</h3>
+                <p style="font-size: 0.88rem;">একটি অরাজনৈতিক ধর্মীয় সংগঠন। আমরা ইসলামের সঠিক বার্তা প্রচারে কাজ করি।</p>
                 <div class="social-links" id="footerSocialLinks">
                     <a href="#" id="footerFb" target="_blank" style="display:none;"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" id="footerYt" target="_blank" style="display:none;"><i class="fab fa-youtube"></i></a>
@@ -1968,7 +1608,7 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; ২০২৬ নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ | Developed By Tuhin Ahmed</p>
+            <p id="copyrightText">&copy; ২০২৬ নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ | সর্বস্ত সংরক্ষিত.</p>
         </div>
     </footer>
 
@@ -1998,10 +1638,30 @@
 
         let currentUser = null;
         let isRegistering = false;
-        let selectedPlan = null;
-        let selectedPaymentMethod = null;
+        let selectedPreset = 0;
 
-        // ========== নামাজের সময়সূচী ==========
+        // ========== ১ ও ৬. রিফ্রেশ রেট স্বয়ংক্রিয় ক্যাপচার লজিক ==========
+        let deviceRefreshRate = 60;
+        let fpsMultiplier = 1;
+
+        function captureDeviceRefreshRate(callback) {
+            let frames = 0;
+            let start = performance.now();
+            function check(now) {
+                frames++;
+                if (now - start >= 350) {
+                    const fps = Math.round((frames * 1000) / (now - start));
+                    deviceRefreshRate = fps > 105 ? 120 : (fps > 75 ? 90 : 60);
+                    fpsMultiplier = 60 / deviceRefreshRate;
+                    if (callback) callback(deviceRefreshRate);
+                } else {
+                    requestAnimationFrame(check);
+                }
+            }
+            requestAnimationFrame(check);
+        }
+
+        // ========== ৫. নামাজের সময়সূচী (স্লিম বার) ==========
         const PRAYER_LOCATION = { lat: 24.3745, lng: 89.0309 }; 
 
         async function loadPrayerTimes() {
@@ -2104,10 +1764,7 @@
         let currentHadithIdx = 0;
         let currentAyatType = 'ayat';
 
-        function getDailyIndex(arr) {
-            const day = new Date().getDate();
-            return day % arr.length;
-        }
+        function getDailyIndex(arr) { return new Date().getDate() % arr.length; }
 
         function renderAyat() {
             const data = currentAyatType === 'ayat' ? QURAN_AYATS[currentAyatIdx] : HADITHS[currentHadithIdx];
@@ -2144,10 +1801,13 @@
             else { navigator.clipboard.writeText(text).then(() => showNotification('কপি হয়েছে!', 'success')); }
         }
 
-        // ========== ইউজার ইন্টারফেস ফাংশন ==========
+        // ========== ইউজার ইন্টারফেস ও ড্রয়ার ফাংশন (৮ নং ফিক্স) ==========
         function scrollToSection(sectionId) {
             const el = document.getElementById(sectionId);
-            if (el) setTimeout(() => { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
+            if (el) {
+                closeDrawer();
+                setTimeout(() => { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 150);
+            }
         }
 
         function toggleDrawer() {
@@ -2165,8 +1825,9 @@
             el.style.display = el.style.display === 'none' ? 'block' : 'none';
         }
 
+        // মডাল খোলার সময় ড্রয়ার ব্যাকগ্রাউন্ডে বহাল থাকবে (অটোমেটিক রিমুভ হবে না)
         function showRegisterModal() {
-            closeDrawer(); document.getElementById('registerModal').classList.add('active');
+            document.getElementById('registerModal').classList.add('active');
         }
 
         function closeModal(modalId) {
@@ -2192,183 +1853,62 @@
             toast.style.cssText = `
                 position:fixed; top:70px; left:50%; transform:translateX(-50%);
                 background:${colors[type]||colors.info}; color:white;
-                padding:0.8rem 1.4rem; border-radius:10px; z-index:99999;
+                padding:0.75rem 1.4rem; border-radius:10px; z-index:99999;
                 font-family:'Noto Sans Bengali',sans-serif; font-size:0.9rem;
                 box-shadow:0 4px 15px rgba(0,0,0,0.25); max-width:90vw;
                 display:flex; align-items:center; gap:0.6rem;
-                animation: toastIn 0.3s ease;
             `;
             toast.innerHTML = `<i class="fas fa-${icons[type]||icons.info}"></i> ${message}`;
             document.body.appendChild(toast);
-
-            if (!document.getElementById('toastStyle')) {
-                const s = document.createElement('style');
-                s.id = 'toastStyle';
-                s.textContent = '@keyframes toastIn{from{opacity:0;top:50px}to{opacity:1;top:70px}}';
-                document.head.appendChild(s);
-            }
             setTimeout(() => { if(toast.parentNode) toast.remove(); }, 3500);
         }
 
-        // ========== ড্যাশবোর্ড লজিক ==========
-        let dashboardLoaded = false;
-
-        async function loadMemberDashboard(user) {
-            if (dashboardLoaded) return;
-            dashboardLoaded = true;
-            document.getElementById('memberDashboard').classList.add('visible');
+        // ========== ৭. ভারপ্রাপ্ত কমিটি বৃন্দ মডাল ফাংশন ==========
+        async function openCommitteeModal() {
+            const modal = document.getElementById('committeeModal');
+            modal.classList.add('active');
+            const listEl = document.getElementById('committeeListContent');
+            listEl.innerHTML = '<div style="text-align:center;padding:2rem;"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</div>';
 
             try {
-                const userDoc = await db.collection('users').doc(user.uid).get();
-                const userData = userDoc.exists ? userDoc.data() : {};
+                const snap = await db.collection('committee').orderBy('serial', 'asc').get();
+                if (snap.empty) {
+                    listEl.innerHTML = '<div style="text-align:center;padding:2rem;color:#888;">বর্তমানে কোনো কমিটি তথ্য পাওয়া যায়নি।</div>';
+                    return;
+                }
 
-                const name = userData.name || user.displayName || 'সদস্য';
-                const email = userData.email || user.email || '';
-                const phone = userData.phone || '';
-                const address = userData.address || '';
-                const joinDate = userData.createdAt ? new Date(userData.createdAt).toLocaleDateString('bn-BD') : '';
-
-                document.getElementById('dashAvatar').textContent = name.charAt(0).toUpperCase();
-                document.getElementById('dashName').textContent = name;
-                document.getElementById('dashEmail').textContent = email;
-                document.getElementById('dashPhone').textContent = phone ? `📞 ${phone}` : '';
-                document.getElementById('dashMemberBadge').textContent = (userData.memberType || 'সাধারণ') + ' সদস্য';
-
-                document.getElementById('profileName').textContent = name;
-                document.getElementById('profileEmail').textContent = email;
-                document.getElementById('profilePhone').textContent = phone || '—';
-                document.getElementById('profileAddress').textContent = address || '—';
-                document.getElementById('profileJoined').textContent = joinDate || '—';
-
-                // রিয়েল-টাইম ইউজার ডোনেশন
-                db.collection('donations').where('userId', '==', user.uid).onSnapshot(donationsSnap => {
-                    let totalDonation = 0;
-                    let donHtml = '';
-                    if (donationsSnap.empty) {
-                        donHtml = '<div class="no-history-msg"><i class="fas fa-heart-broken"></i> এখনো কোনো দান করা হয়নি</div>';
-                    } else {
-                        let donList = [];
-                        donationsSnap.forEach(doc => {
-                            const d = doc.data();
-                            let dateObj = d.createdAt?.toDate ? d.createdAt.toDate() : (typeof d.createdAt === 'string' ? new Date(d.createdAt) : new Date(0));
-                            donList.push({ ...d, _dateObj: dateObj });
-                        });
-                        donList.sort((a, b) => b._dateObj - a._dateObj);
-                        donList = donList.slice(0, 10);
-
-                        donList.forEach(d => {
-                            totalDonation += d.amount || 0;
-                            const date = d._dateObj.getTime() > 0 ? d._dateObj.toLocaleDateString('bn-BD') : '—';
-                            const statusClass = d.status === 'approved' || d.status === 'completed' ? 'badge-success' : 'badge-pending';
-                            const statusLabel = d.status === 'approved' || d.status === 'completed' ? 'অনুমোদিত' : 'অপেক্ষমান';
-                            donHtml += `<div class="history-item">
-                                <div class="history-icon donation"><i class="fas fa-hand-holding-heart"></i></div>
-                                <div class="history-info">
-                                    <strong>${(d.amount || 0).toLocaleString()} ৳ দান</strong>
-                                    <small>${date} &nbsp;|&nbsp; ${d.provider || 'অনলাইন'}</small>
-                                </div>
-                                <span class="status-badge-sm ${statusClass}">${statusLabel}</span>
-                            </div>`;
-                        });
-                    }
-                    document.getElementById('dashDonationsList').innerHTML = donHtml;
-                    document.getElementById('dashTotalDonations').textContent = totalDonation.toLocaleString('bn-BD');
-                });
-
-                // পেমেন্ট লিস্ট
-                const paymentsSnap = await db.collection('payments').where('userId', '==', user.uid).orderBy('createdAt', 'desc').limit(10).get();
-                let payHtml = '';
-                if (paymentsSnap.empty) {
-                    payHtml = '<div class="no-history-msg"><i class="fas fa-receipt"></i> কোনো পেমেন্ট ইতিহাস নেই</div>';
-                } else {
-                    paymentsSnap.forEach(doc => {
-                        const p = doc.data();
-                        const date = p.createdAt?.toDate ? p.createdAt.toDate().toLocaleDateString('bn-BD') : '—';
-                        payHtml += `<div class="history-item">
-                            <div class="history-icon payment"><i class="fas fa-receipt"></i></div>
-                            <div class="history-info">
-                                <strong>${p.planName || 'পেমেন্ট'} — ${p.amount?.toLocaleString() || 0} ৳</strong>
-                                <small>${date}</small>
+                let html = '<div style="display:grid; grid-template-columns: 1fr; gap: 0.8rem;">';
+                snap.forEach(doc => {
+                    const c = doc.data();
+                    html += `
+                        <div style="background:#fff; border:1px solid #e2ece5; padding:0.9rem 1rem; border-radius:12px; display:flex; gap:0.9rem; align-items:center; box-shadow:0 2px 6px rgba(0,0,0,0.04); position:relative;">
+                            <div style="position:absolute; right:12px; top:12px; background:#e8f5ec; color:#1a472a; padding:0.18rem 0.6rem; border-radius:20px; font-size:0.75rem; font-weight:700;">
+                                ক্রমিক: ${c.serial || '—'}
                             </div>
-                        </div>`;
-                    });
-                }
-                document.getElementById('dashPaymentsList').innerHTML = payHtml;
-                document.getElementById('dashTotalPayments').textContent = paymentsSnap.size;
-
-            } catch (e) { console.error('Dashboard লোড সমস্যা:', e); }
-        }
-
-        function hideMemberDashboard() {
-            document.getElementById('memberDashboard').classList.remove('visible');
-            dashboardLoaded = false;
-        }
-
-        function switchDashTab(tab, el) {
-            document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.dash-tab-content').forEach(c => c.classList.remove('active'));
-            el.classList.add('active');
-            document.getElementById(`dash-${tab}`).classList.add('active');
-        }
-
-        // ========== নতুন যুক্ত করা ফাংশন (পাসওয়ার্ড, এডিট প্রোফাইল, ইভেন্ট) ==========
-        async function resetPassword() {
-            const email = document.getElementById('drawerEmail').value.trim();
-            if (!email) {
-                showNotification('প্রথমে উপরের বক্সে আপনার ইমেইল ঠিকানা লিখুন', 'error');
-                return;
-            }
-            try {
-                await auth.sendPasswordResetEmail(email);
-                showNotification('পাসওয়ার্ড রিসেট লিংক আপনার ইমেইলে পাঠানো হয়েছে!', 'success');
-            } catch (error) {
-                showNotification('ইমেইলটি সঠিক নয় বা কোনো সমস্যা হয়েছে!', 'error');
-            }
-        }
-
-        async function editProfilePrompt() {
-            if (!currentUser) return;
-            const newPhone = prompt('আপনার নতুন মোবাইল নম্বর দিন (পরিবর্তন না করতে চাইলে ফাঁকা রাখুন):');
-            const newAddress = prompt('আপনার নতুন ঠিকানা দিন (পরিবর্তন না করতে চাইলে ফাঁকা রাখুন):');
-            
-            let updates = {};
-            if (newPhone) updates.phone = newPhone;
-            if (newAddress) updates.address = newAddress;
-            
-            if (Object.keys(updates).length > 0) {
-                try {
-                    await db.collection('users').doc(currentUser.uid).update(updates);
-                    showNotification('আপনার প্রোফাইল সফলভাবে আপডেট হয়েছে!', 'success');
-                    dashboardLoaded = false;
-                    loadMemberDashboard(currentUser);
-                } catch (error) {
-                    showNotification('প্রোফাইল আপডেট করতে সমস্যা হয়েছে!', 'error');
-                }
-            }
-        }
-
-        window.attendEvent = async function(eventId) {
-            if (!currentUser) {
-                showNotification('ইভেন্টে অংশগ্রহণ করতে আগে লগইন করুন!', 'error');
-                openDrawer();
-                return;
-            }
-            try {
-                await db.collection('eventAttendees').add({
-                    eventId: eventId,
-                    userId: currentUser.uid,
-                    userName: currentUser.displayName || 'সদস্য',
-                    joinedAt: new Date().toISOString()
+                            ${c.photo ? `<img src="${c.photo}" style="width:50px; height:50px; border-radius:50%; object-fit:cover; border:2px solid #ffd700; flex-shrink:0;">` : `
+                                <div style="width:50px; height:50px; background:linear-gradient(135deg, #1a472a, #2d6a4f); color:#ffd700; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.25rem; font-weight:bold; flex-shrink:0;">
+                                    ${(c.name || 'ক')[0].toUpperCase()}
+                                </div>
+                            `}
+                            <div style="flex:1; padding-right:55px;">
+                                <h4 style="color:#1a472a; margin-bottom:0.2rem; font-size:1rem;">${c.name || 'নাম নেই'}</h4>
+                                <div style="display:inline-block; background:#ffd700; color:#1a472a; font-size:0.78rem; font-weight:700; padding:0.15rem 0.55rem; border-radius:6px; margin-bottom:0.25rem;">
+                                    <i class="fas fa-certificate"></i> ${c.designation || 'পদবী'}
+                                </div>
+                                ${c.phone ? `<p style="font-size:0.8rem; color:#555;"><i class="fas fa-phone-alt" style="color:#1a472a;"></i> ${c.phone}</p>` : ''}
+                            </div>
+                        </div>
+                    `;
                 });
-                showNotification('আপনি সফলভাবে ইভেন্টে রেজিস্টার করেছেন!', 'success');
-            } catch (error) {
-                showNotification('রেজিস্ট্রেশন করতে সমস্যা হয়েছে!', 'error');
+                html += '</div>';
+                listEl.innerHTML = html;
+            } catch(e) {
+                listEl.innerHTML = '<div style="text-align:center;padding:2rem;color:red;">ডাটা লোড করতে সমস্যা হয়েছে।</div>';
             }
-        };
+        }
 
-        // ========== নতুন মডাল ফাংশন (সদস্য ও মাসিক দান) ==========
+        // সদস্য লিস্ট মডাল (ড্রয়ার ব্যাকগ্রাউন্ডে থাকবে)
         async function openMemberListModal(type) {
-            closeDrawer();
             const modal = document.getElementById('memberListModal');
             modal.classList.add('active');
             document.getElementById('memberListTitle').textContent = type + ' সদস্য তালিকা';
@@ -2388,12 +1928,12 @@
                     if(u.isActive === false) return; 
 
                     html += `
-                        <div style="background:#fff; border:1px solid #eee; padding:1rem; border-radius:10px; display:flex; gap:1rem; align-items:center;">
-                            <div style="width:45px; height:45px; background:linear-gradient(135deg, #1a472a, #2d6a4f); color:#ffd700; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.2rem; font-weight:bold; flex-shrink:0;">
+                        <div style="background:#fff; border:1px solid #eee; padding:0.9rem; border-radius:10px; display:flex; gap:0.9rem; align-items:center;">
+                            <div style="width:42px; height:42px; background:linear-gradient(135deg, #1a472a, #2d6a4f); color:#ffd700; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.15rem; font-weight:bold; flex-shrink:0;">
                                 ${(u.name || 'স')[0].toUpperCase()}
                             </div>
                             <div>
-                                <h4 style="color:#1a472a; margin-bottom:0.2rem; font-size:1rem;">${u.name || 'নাম নেই'}</h4>
+                                <h4 style="color:#1a472a; margin-bottom:0.15rem; font-size:0.95rem;">${u.name || 'নাম নেই'}</h4>
                                 <p style="font-size:0.8rem; color:#666; margin-bottom:0.1rem;"><i class="fas fa-phone-alt"></i> ${u.phone || 'দেওয়া নেই'}</p>
                                 <p style="font-size:0.8rem; color:#666;"><i class="fas fa-map-marker-alt"></i> ${u.address || 'দেওয়া নেই'}</p>
                             </div>
@@ -2407,6 +1947,7 @@
             }
         }
 
+        // মাসিক দান মডাল
         async function openMonthlyDonationModal() {
             document.getElementById('monthlyDonationModal').classList.add('active');
             const listEl = document.getElementById('monthlyDonationList');
@@ -2435,18 +1976,18 @@
                 }
 
                 let total = 0;
-                let html = '<div style="display:flex; flex-direction:column; gap:0.8rem;">';
+                let html = '<div style="display:flex; flex-direction:column; gap:0.75rem;">';
                 donations.forEach(d => {
                     total += (d.amount || 0);
                     html += `
-                        <div style="background:#f8f9fa; padding:1rem; border-radius:10px; border-left:4px solid #1a472a; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
+                        <div style="background:#f8f9fa; padding:0.9rem; border-radius:10px; border-left:4px solid #1a472a; box-shadow:0 2px 5px rgba(0,0,0,0.04);">
                             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                                 <div>
-                                    <h4 style="color:#1a472a; margin-bottom:0.2rem; font-size:1rem;">${d.donorName || 'বেনামী'}</h4>
-                                    <p style="font-size:0.8rem; color:#666;"><i class="fas fa-calendar-alt"></i> ${d._dDate.toLocaleDateString('bn-BD')}</p>
-                                    ${d.note ? `<p style="font-size:0.85rem; color:#444; margin-top:0.4rem; font-style:italic;"><i class="fas fa-quote-left" style="color:#aaa;"></i> ${d.note}</p>` : ''}
+                                    <h4 style="color:#1a472a; margin-bottom:0.2rem; font-size:0.95rem;">${d.donorName || 'বেনামী'}</h4>
+                                    <p style="font-size:0.78rem; color:#666;"><i class="fas fa-calendar-alt"></i> ${d._dDate.toLocaleDateString('bn-BD')}</p>
+                                    ${d.note ? `<p style="font-size:0.8rem; color:#444; margin-top:0.3rem; font-style:italic;">${d.note}</p>` : ''}
                                 </div>
-                                <div style="background:#d4edda; color:#1a472a; padding:0.4rem 0.8rem; border-radius:20px; font-weight:bold; font-size:0.9rem;">
+                                <div style="background:#d4edda; color:#1a472a; padding:0.35rem 0.75rem; border-radius:20px; font-weight:bold; font-size:0.85rem;">
                                     ${d.amount} ৳
                                 </div>
                             </div>
@@ -2454,8 +1995,8 @@
                     `;
                 });
                 html += `</div>
-                <div style="margin-top:1.5rem; background:#1a472a; color:white; padding:1rem; border-radius:10px; text-align:center;">
-                    <h3 style="margin:0;">এই মাসের মোট দান: ${total.toLocaleString('bn-BD')} ৳</h3>
+                <div style="margin-top:1.2rem; background:#1a472a; color:white; padding:0.85rem; border-radius:10px; text-align:center;">
+                    <h4 style="margin:0;">এই মাসের মোট দান: ${total.toLocaleString('bn-BD')} ৳</h4>
                 </div>`;
                 listEl.innerHTML = html;
             } catch(e) {
@@ -2463,10 +2004,268 @@
             }
         }
 
-        // ========== রিয়েল-টাইম ডাটা লোডিং (ফায়ারবেস onSnapshot) ==========
-        function initRealtimeData() {
+        // ========== ৪. ইসলামিক দান চেকআউট লজিক ==========
+        let currentSelectedMethod = null;
+
+        function setDonateAmount(val) {
+            document.getElementById('donateAmount').value = val;
+            document.querySelectorAll('.amount-preset').forEach(p => p.classList.remove('selected'));
+            event.target.classList.add('selected');
+        }
+
+        function clearPresetSelection() {
+            document.querySelectorAll('.amount-preset').forEach(p => p.classList.remove('selected'));
+        }
+
+        function openIslamicCheckout() {
+            const amount = parseInt(document.getElementById('donateAmount').value);
+            const donorName = document.getElementById('donorName').value.trim() || 'বেনামী দাতা';
+            const note = document.getElementById('donateNote').value.trim() || 'সাধারণ দান তহবিল';
+
+            if (!amount || amount < 10) {
+                showNotification('সর্বনিম্ন ১০ টাকা দান নির্বাচন বা টাইপ করুন!', 'warning');
+                return;
+            }
+
+            document.getElementById('checkoutDonorName').textContent = donorName;
+            document.getElementById('checkoutDonorNote').textContent = note;
+            document.getElementById('checkoutDonorAmount').textContent = amount.toLocaleString('bn-BD') + ' ৳';
+
+            document.getElementById('checkoutStepForm').style.display = 'block';
+            document.getElementById('checkoutSuccessScreen').style.display = 'none';
+            document.getElementById('selectedMethodDetails').style.display = 'none';
+            document.getElementById('checkoutTxFields').style.display = 'none';
+
+            loadIslamicCheckoutMethods();
+            document.getElementById('islamicCheckoutModal').classList.add('active');
+        }
+
+        async function loadIslamicCheckoutMethods() {
+            const container = document.getElementById('checkoutMethodsContainer');
+            try {
+                const snap = await db.collection('donationPaymentMethods').where('isActive', '==', true).get();
+                if (snap.empty) {
+                    // ডিফল্ট অফলাইন/ম্যানুয়াল মেথড ব্যাকআপ
+                    container.innerHTML = `
+                        <div onclick="selectCheckoutMethod({name:'বিকাশ', number:'+৮৮০১৮৭৩০১১৭৩৬', type:'Personal', instruction:'বিকাশ Send Money করে নিচের বক্সে TrxID লিখুন'})" style="border:1.5px solid #ddd; border-radius:10px; padding:0.7rem; text-align:center; cursor:pointer;">
+                            <i class="fas fa-mobile-alt" style="color:#e2136e; font-size:1.5rem; display:block; margin-bottom:0.2rem;"></i>
+                            <strong style="font-size:0.85rem;">বিকাশ</strong>
+                        </div>
+                        <div onclick="selectCheckoutMethod({name:'নগদ', number:'+৮৮০১৮৭৩০১১৭৩৬', type:'Personal', instruction:'নগদ Send Money করে ট্রানজেকশন আইডি দিন'})" style="border:1.5px solid #ddd; border-radius:10px; padding:0.7rem; text-align:center; cursor:pointer;">
+                            <i class="fas fa-wallet" style="color:#f7941d; font-size:1.5rem; display:block; margin-bottom:0.2rem;"></i>
+                            <strong style="font-size:0.85rem;">নগদ</strong>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+                snap.forEach(doc => {
+                    const m = doc.data();
+                    const mDataStr = JSON.stringify(m).replace(/"/g, '&quot;');
+                    html += `
+                        <div class="method-card" onclick="selectCheckoutMethod(${mDataStr}, this)" style="border:1.5px solid #ddd; border-radius:10px; padding:0.7rem 0.5rem; text-align:center; cursor:pointer; background:white; transition:all 0.2s;">
+                            ${m.iconUrl ? `<img src="${m.iconUrl}" style="height:26px; object-fit:contain; margin-bottom:0.2rem; display:block; margin-left:auto; margin-right:auto;">` : `<i class="fas fa-money-check-alt" style="color:#1a472a; font-size:1.3rem; margin-bottom:0.2rem; display:block;"></i>`}
+                            <strong style="font-size:0.82rem; color:#1a472a; display:block;">${m.name}</strong>
+                            <small style="font-size:0.72rem; color:#666;">${m.type || 'অ্যাকাউন্ট'}</small>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            } catch(e) {
+                container.innerHTML = '<div style="color:red; font-size:0.85rem;">মেথড লোড ব্যর্থ হয়েছে।</div>';
+            }
+        }
+
+        function selectCheckoutMethod(method, el) {
+            currentSelectedMethod = method;
+            document.querySelectorAll('#checkoutMethodsContainer .method-card').forEach(c => {
+                c.style.borderColor = '#ddd';
+                c.style.background = 'white';
+            });
+            if (el) {
+                el.style.borderColor = '#1a472a';
+                el.style.background = '#e8f5ec';
+            }
+
+            const det = document.getElementById('selectedMethodDetails');
+            det.style.display = 'block';
+            det.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                    <strong style="color:#1a472a; font-size:0.9rem;">${method.name} (${method.type || 'পার্সোনাল'})</strong>
+                    <button type="button" onclick="copyNumber('${method.number}')" style="background:#1a472a; color:#ffd700; border:none; border-radius:6px; padding:0.25rem 0.6rem; font-size:0.75rem; cursor:pointer;">
+                        <i class="fas fa-copy"></i> কপি করুন
+                    </button>
+                </div>
+                <div style="font-size:1.05rem; font-weight:800; color:#1a472a; letter-spacing:0.5px; margin-bottom:0.35rem;">
+                    📞 ${method.number}
+                </div>
+                <div style="font-size:0.8rem; color:#555; line-height:1.4;">
+                    <i class="fas fa-info-circle" style="color:#1a472a;"></i> ${method.instruction || 'উক্ত নম্বরে টাকা পাঠিয়ে নিচের বক্সে TrxID এবং আপনার নম্বর প্রদান করুন।'}
+                </div>
+            `;
+            document.getElementById('checkoutTxFields').style.display = 'block';
+        }
+
+        function copyNumber(num) {
+            navigator.clipboard.writeText(num).then(() => {
+                showNotification('নম্বর কপি হয়েছে: ' + num, 'success');
+            });
+        }
+
+        async function submitIslamicDonation() {
+            if (!currentSelectedMethod) {
+                showNotification('অনুগ্রহ করে একটি পেমেন্ট মেথড নির্বাচন করুন!', 'warning');
+                return;
+            }
+
+            const amount = parseInt(document.getElementById('donateAmount').value);
+            const donorName = document.getElementById('donorName').value.trim() || 'বেনামী দাতা';
+            const note = document.getElementById('donateNote').value.trim() || '';
+            const senderPhone = document.getElementById('checkoutSenderPhone').value.trim();
+            const trxId = document.getElementById('checkoutTrxId').value.trim();
+
+            if (!senderPhone || !trxId) {
+                showNotification('আপনার নম্বর এবং ট্রানজেকশন আইডি (TrxID) দিন!', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('confirmDonationBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> যাচাই করা হচ্ছে...';
+
+            try {
+                await db.collection('donations').add({
+                    donorName: donorName,
+                    amount: amount,
+                    provider: currentSelectedMethod.name,
+                    senderPhone: senderPhone,
+                    trxId: trxId.toUpperCase(),
+                    note: note,
+                    status: 'pending',
+                    userId: currentUser ? currentUser.uid : null,
+                    userEmail: currentUser ? currentUser.email : null,
+                    createdAt: new Date().toISOString()
+                });
+
+                document.getElementById('checkoutStepForm').style.display = 'none';
+                document.getElementById('checkoutSuccessScreen').style.display = 'block';
+                document.getElementById('donateAmount').value = '';
+                document.getElementById('donorName').value = '';
+                document.getElementById('donateNote').value = '';
+                document.getElementById('checkoutSenderPhone').value = '';
+                document.getElementById('checkoutTrxId').value = '';
+
+            } catch(e) {
+                showNotification('দান প্রক্রিয়াকরণে সমস্যা হয়েছে: ' + e.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> দান নিশ্চিত করুন ও সওয়াব প্রার্থনা করুন';
+            }
+        }
+
+        // ========== ৬. রিফ্রেশ রেট অনুযায়ী অপ্টিমাইজড নিউজ টিকার ==========
+        let tickerPos = null;
+        let tickerRAF = null;
+
+        function startTickerScroll() {
+            const wrap = document.querySelector('.news-ticker');
+            const el   = document.getElementById('newsTickerContent');
+            if (!wrap || !el) return;
+            if (tickerRAF) { cancelAnimationFrame(tickerRAF); tickerRAF = null; }
             
-            // ১. রিয়েল-টাইম নিউজ
+            wrap.style.overflow = 'hidden';
+            el.style.display    = 'inline-block';
+            el.style.whiteSpace = 'nowrap';
+            
+            const wrapW = wrap.offsetWidth;
+            if (tickerPos === null || tickerPos < -el.offsetWidth) { tickerPos = wrapW; }
+
+            let lastTime = null;
+            function step(timestamp) {
+                if (!lastTime) lastTime = timestamp;
+                const delta = timestamp - lastTime;
+                lastTime = timestamp;
+                
+                // ফ্রেম রেট ডেল্টা ক্যালকুলেশন
+                const speed = (window._tickerSpeed || 1.2) * (delta / 16.67);
+                tickerPos -= speed;
+                if (tickerPos < -el.offsetWidth) tickerPos = wrapW;
+                
+                // সাব-পিক্সেল ট্রান্সফর্ম (Math.round বাদ দিয়ে তরল অ্যানিমেশন)
+                el.style.transform = `translate3d(${tickerPos}px, 0, 0)`;
+                tickerRAF = requestAnimationFrame(step);
+            }
+            tickerRAF = requestAnimationFrame(step);
+        }
+
+        function loadNewsTicker() {
+            db.collection('newsTicker').orderBy('updatedAt', 'desc').limit(1).onSnapshot(snapshot => {
+                if (!snapshot.empty) {
+                    const d = snapshot.docs[0].data();
+                    document.getElementById('newsTickerContent').innerHTML = d.content || '';
+                    if (d.speed) window._tickerSpeed = parseFloat(d.speed) || 1.2;
+                    setTimeout(startTickerScroll, 200);
+                }
+            });
+        }
+
+        // ========== ৩. সাইট সেটিংস ও সোশ্যাল মিডিয়া রিয়েল-টাইম লোড ==========
+        function initSiteSettingsListener() {
+            db.collection('settings').doc('siteInfo').onSnapshot(doc => {
+                if (!doc.exists) return;
+                try {
+                    const d = doc.data();
+                    
+                    // ৩ নং ফিক্স: সাইটের নাম ডায়নামিক আপডেট
+                    if (d.siteName && d.siteName.trim() !== '') {
+                        document.getElementById('siteHeaderTitle').textContent = d.siteName;
+                        document.getElementById('drawerSiteTitle').textContent = d.siteName;
+                        document.getElementById('heroMainHeading').textContent = d.siteName + ' এ স্বাগতম';
+                        document.getElementById('aboutSiteTitle').textContent = d.siteName;
+                        document.getElementById('footerOrgTitle').textContent = d.siteName;
+                        document.getElementById('sitePageTitle').textContent = d.siteName;
+                        document.getElementById('copyrightText').innerHTML = `&copy; ২০২৬ ${d.siteName} | Developed By Tuhin Ahmed`;
+                    }
+
+                    // ৩ নং ফিক্স: সাইট লোগো ইমেজ ডিরেক্ট লিংক হ্যান্ডলিং
+                    if (d.siteLogoUrl && d.siteLogoUrl.trim() !== '') {
+                        document.getElementById('siteHeaderIconWrapper').innerHTML = `<img src="${d.siteLogoUrl}" alt="Logo">`;
+                        document.getElementById('drawerLogoBox').innerHTML = `<img src="${d.siteLogoUrl}" alt="Logo">`;
+                        const fav = document.getElementById('siteFavicon');
+                        if (fav) fav.href = d.siteLogoUrl;
+                    } else {
+                        document.getElementById('siteHeaderIconWrapper').innerHTML = `<i class="fas fa-mosque" id="siteHeaderIcon"></i>`;
+                        document.getElementById('drawerLogoBox').innerHTML = `<i class="fas fa-mosque" id="drawerMosqueIcon"></i>`;
+                    }
+
+                    if (d.address) document.getElementById('contactAddress').textContent = d.address;
+                    if (d.phone) document.getElementById('contactPhone').innerHTML = `<a href="tel:${d.phone}" style="color:#555;text-decoration:none;">${d.phone}</a>`;
+                    if (d.email) document.getElementById('contactEmail').innerHTML = `<a href="mailto:${d.email}" style="color:#555;text-decoration:none;">${d.email}</a>`;
+
+                    const socials = [
+                        { id: 'socialFb', fid: 'footerFb', url: d.facebook }, 
+                        { id: 'socialYt', fid: 'footerYt', url: d.youtube }, 
+                        { id: 'socialWa', fid: 'footerWa', url: d.whatsapp }
+                    ];
+                    socials.forEach(s => {
+                        const el = document.getElementById(s.id);
+                        const fel = document.getElementById(s.fid);
+                        if (s.url && s.url.trim() !== '') {
+                            if (el) { el.href = s.url; el.style.display = 'flex'; }
+                            if (fel) { fel.href = s.url; fel.style.display = 'flex'; }
+                        } else {
+                            if (el) el.style.display = 'none';
+                            if (fel) fel.style.display = 'none';
+                        }
+                    });
+                } catch(e) {}
+            });
+        }
+
+        // ========== রিয়েল-টাইম ডাটা লোডিং ==========
+        function initRealtimeData() {
+            // ১. নিউজ
             db.collection('news').where('status', '==', 'published').orderBy('createdAt', 'desc').limit(6)
             .onSnapshot(snapshot => {
                 const container = document.getElementById('newsContainer');
@@ -2477,7 +2276,7 @@
                     const date = news.createdAt?.toDate ? news.createdAt.toDate().toLocaleDateString('bn-BD') : '';
                     html += `
                         <div class="news-item">
-                            <img src="${news.image || 'https://images.unsplash.com/photo-1585412727339-54e4eae896c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'}">
+                            <img src="${news.image || 'https://images.unsplash.com/photo-1585412727339-54e4eae896c6?auto=format&fit=crop&w=500&q=80'}">
                             <div class="news-content">
                                 <div class="news-date">${date}</div>
                                 <h3>${news.title}</h3>
@@ -2489,20 +2288,20 @@
                 container.innerHTML = html;
             });
 
-            // ২. রিয়েল-টাইম ইভেন্ট 
+            // ২. ইভেন্ট 
             db.collection('events').orderBy('date', 'desc').onSnapshot(snapshot => {
                 const container = document.getElementById('calendar');
                 if (snapshot.empty) { container.innerHTML = '<div style="text-align: center; color: #888; padding: 2rem;">বর্তমানে কোনো ইভেন্ট নেই।</div>'; return; }
-                let html = '<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">';
+                let html = '<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">';
                 snapshot.forEach(doc => {
                     const event = doc.data();
                     const eventDate = new Date(event.date).toLocaleDateString('bn-BD');
                     html += `
-                        <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 4px solid #1a472a;">
-                            <h3 style="color: #1a472a; margin-bottom: 0.5rem;">${event.title}</h3>
-                            <p style="font-size: 0.9rem; color: #555; margin-bottom: 0.3rem;"><i class="fas fa-calendar-alt" style="color: #ffd700;"></i> তারিখ: ${eventDate} | <i class="fas fa-clock" style="color: #ffd700;"></i> সময়: ${event.time || 'N/A'}</p>
-                            <p style="font-size: 0.9rem; color: #555; margin-bottom: 0.8rem;"><i class="fas fa-map-marker-alt" style="color: #ffd700;"></i> স্থান: ${event.location}</p>
-                            <p style="font-size: 0.95rem; color: #333; margin-bottom: 1rem;">${event.description}</p>
+                        <div style="background: white; border-radius: 12px; padding: 1.2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-left: 4px solid #1a472a;">
+                            <h3 style="color: #1a472a; margin-bottom: 0.4rem; font-size:1.1rem;">${event.title}</h3>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0.3rem;"><i class="fas fa-calendar-alt" style="color: #ffd700;"></i> তারিখ: ${eventDate}</p>
+                            <p style="font-size: 0.85rem; color: #555; margin-bottom: 0.6rem;"><i class="fas fa-map-marker-alt" style="color: #ffd700;"></i> স্থান: ${event.location}</p>
+                            <p style="font-size: 0.9rem; color: #333; margin-bottom: 0.8rem;">${event.description}</p>
                             <button class="btn btn-small" onclick="attendEvent('${doc.id}')" style="width: 100%;"><i class="fas fa-check-circle"></i> অংশগ্রহণ করুন</button>
                         </div>
                     `;
@@ -2511,7 +2310,7 @@
                 container.innerHTML = html;
             });
 
-            // ৩. রিয়েল-টাইম গ্যালারি
+            // ৩. গ্যালারি
             db.collection('gallery').orderBy('createdAt', 'desc').limit(8).onSnapshot(snapshot => {
                 const container = document.getElementById('galleryContainer');
                 let html = '';
@@ -2527,30 +2326,7 @@
                 container.innerHTML = html;
             });
 
-            // ৪. রিয়েল-টাইম সাইট সেটিংস ও সোশ্যাল মিডিয়া বাটন
-            db.collection('settings').doc('siteInfo').onSnapshot(doc => {
-              if (!doc.exists) return;
-              try {
-                const d = doc.data();
-                if (d.address) document.getElementById('contactAddress').textContent = d.address;
-                if (d.phone) document.getElementById('contactPhone').innerHTML = `<a href="tel:${d.phone}" style="color:#555;text-decoration:none;">${d.phone}</a>`;
-                if (d.email) document.getElementById('contactEmail').innerHTML = `<a href="mailto:${d.email}" style="color:#555;text-decoration:none;">${d.email}</a>`;
-
-                // সোশ্যাল মিডিয়া বাটন ফিক্স
-                const socials = [{ id: 'socialFb', fid: 'footerFb', url: d.facebook }, { id: 'socialYt', fid: 'footerYt', url: d.youtube }, { id: 'socialWa', fid: 'footerWa', url: d.whatsapp }];
-                socials.forEach(s => {
-                    if (s.url && s.url.trim() !== '') {
-                        const el = document.getElementById(s.id); if (el) { el.href = s.url; el.style.display = 'flex'; }
-                        const fel = document.getElementById(s.fid); if (fel) { fel.href = s.url; fel.style.display = 'flex'; }
-                    } else {
-                        const el = document.getElementById(s.id); if (el) { el.style.display = 'none'; }
-                        const fel = document.getElementById(s.fid); if (fel) { fel.style.display = 'none'; }
-                    }
-                });
-              } catch(e) {}
-            });
-
-            // ৫. রিয়েল-টাইম স্ট্যাটিস্টিক্স
+            // ৪. স্ট্যাটিস্টিক্স
             db.collection('users').onSnapshot(snap => { document.getElementById('totalMembers').textContent = snap.size + '+'; });
             db.collection('events').onSnapshot(snap => { document.getElementById('totalEvents').textContent = snap.size + '+'; });
             db.collection('news').onSnapshot(snap => { document.getElementById('totalNews').textContent = snap.size + '+'; });
@@ -2566,7 +2342,6 @@
                 });
                 document.getElementById('totalDonations').textContent = totalDon.toLocaleString('bn-BD');
 
-                // পাবলিক দান ইতিহাস আপডেট
                 donations.sort((a, b) => b._dateObj - a._dateObj);
                 donations = donations.slice(0, 30);
                 let html = '';
@@ -2603,7 +2378,7 @@
             });
         }
 
-        // ========== অথেনটিকেশন ফাংশন ==========
+        // ========== অথেনটিকেশন ও ড্যাশবোর্ড লজিক ==========
         async function handleDrawerLogin() {
             const email    = document.getElementById('drawerEmail').value.trim();
             const password = document.getElementById('drawerPassword').value;
@@ -2675,12 +2450,6 @@
                 document.getElementById('drawerUserInfo').style.display = 'block';
                 document.getElementById('drawerUserName').textContent = displayName;
 
-                if (isRegistering) {
-                    loadMemberDashboard(user);
-                    document.getElementById('dashboardMenuLink').style.display = 'block';
-                    return;
-                }
-
                 let userDoc = await db.collection('users').doc(user.uid).get();
                 if (userDoc.exists) {
                     const userData = userDoc.data();
@@ -2701,7 +2470,7 @@
                 document.getElementById('drawerLoginForm').style.display = 'block';
                 document.getElementById('drawerUserInfo').style.display = 'none';
                 document.getElementById('adminPanelBtn').style.display = 'none';
-                hideMemberDashboard();
+                document.getElementById('memberDashboard').classList.remove('visible');
                 document.getElementById('dashboardMenuLink').style.display = 'none';
             }
         });
@@ -2712,90 +2481,105 @@
             closeDrawer();
         }
 
-        function goToAdminPanel() {
-            window.location.href = 'admin.html';
-        }
+        function goToAdminPanel() { window.location.href = 'admin.html'; }
 
-        // ========== পেমেন্ট / দান ফাংশন ==========
-        function submitPaymentForm(actionUrl, dataObj) {
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = actionUrl;
-            form.target = '_blank';
-            form.style.display = 'none';
-
-            Object.keys(dataObj).forEach(key => {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = key;
-                input.value = dataObj[key] ?? '';
-                form.appendChild(input);
-            });
-
-            document.body.appendChild(form);
-            form.submit();
-            setTimeout(() => document.body.removeChild(form), 1000);
-        }
-
-        async function processDonation() {
-            const amount = parseInt(document.getElementById('donateAmount').value);
-            const donorName = document.getElementById('donorName').value.trim() || 'বেনামী দাতা';
-            const donateNoteEl = document.getElementById('donateNote');
-            const donateNote = donateNoteEl ? donateNoteEl.value.trim() : '';
-
-            if (!amount || amount < 10) { showNotification('সর্বনিম্ন ১০ টাকা দান করতে হবে!', 'error'); return; }
-
-            const btn = document.getElementById('donateBtn');
-            const loading = document.getElementById('providerLoading');
-            btn.disabled = true;
-            loading.classList.add('active');
-
+        async function loadMemberDashboard(user) {
+            document.getElementById('memberDashboard').classList.add('visible');
             try {
-                const settingsDoc = await db.collection('settings').doc('paymentProvider').get();
+                const userDoc = await db.collection('users').doc(user.uid).get();
+                const userData = userDoc.exists ? userDoc.data() : {};
 
-                if (!settingsDoc.exists || !settingsDoc.data().isActive) {
-                    showNotification('পেমেন্ট গেটওয়ে এই মুহূর্তে বন্ধ আছে।', 'error');
-                    btn.disabled = false;
-                    loading.classList.remove('active');
-                    return;
-                }
+                const name = userData.name || user.displayName || 'সদস্য';
+                const email = userData.email || user.email || '';
+                const phone = userData.phone || '';
+                const address = userData.address || '';
+                const joinDate = userData.createdAt ? new Date(userData.createdAt).toLocaleDateString('bn-BD') : '';
 
-                const providerData = settingsDoc.data();
-                const paymentUrl = providerData.paymentUrl;
-                const providerName = providerData.providerName || 'পেমেন্ট গেটওয়ে';
-                
-                const donationRef = await db.collection('donations').add({
-                    donorName: donorName,
-                    userId: currentUser ? currentUser.uid : null,
-                    userEmail: currentUser ? currentUser.email : null,
-                    amount: amount,
-                    status: 'pending',
-                    provider: providerName,
-                    createdAt: new Date().toISOString(),
-                    note: donateNote || ''
+                document.getElementById('dashAvatar').textContent = name.charAt(0).toUpperCase();
+                document.getElementById('dashName').textContent = name;
+                document.getElementById('dashEmail').textContent = email;
+                document.getElementById('dashPhone').textContent = phone ? `📞 ${phone}` : '';
+                document.getElementById('dashMemberBadge').textContent = (userData.memberType || 'সাধারণ') + ' সদস্য';
+
+                document.getElementById('profileName').textContent = name;
+                document.getElementById('profileEmail').textContent = email;
+                document.getElementById('profilePhone').textContent = phone || '—';
+                document.getElementById('profileAddress').textContent = address || '—';
+                document.getElementById('profileJoined').textContent = joinDate || '—';
+
+                db.collection('donations').where('userId', '==', user.uid).onSnapshot(donationsSnap => {
+                    let totalDonation = 0;
+                    let donHtml = '';
+                    if (donationsSnap.empty) {
+                        donHtml = '<div class="no-history-msg"><i class="fas fa-heart-broken"></i> এখনো কোনো দান করা হয়নি</div>';
+                    } else {
+                        let donList = [];
+                        donationsSnap.forEach(doc => {
+                            const d = doc.data();
+                            let dateObj = d.createdAt?.toDate ? d.createdAt.toDate() : (typeof d.createdAt === 'string' ? new Date(d.createdAt) : new Date(0));
+                            donList.push({ ...d, _dateObj: dateObj });
+                        });
+                        donList.sort((a, b) => b._dateObj - a._dateObj);
+                        donList.forEach(d => {
+                            totalDonation += d.amount || 0;
+                            const date = d._dateObj.getTime() > 0 ? d._dateObj.toLocaleDateString('bn-BD') : '—';
+                            const statusClass = d.status === 'approved' || d.status === 'completed' ? 'badge-success' : 'badge-pending';
+                            const statusLabel = d.status === 'approved' || d.status === 'completed' ? 'অনুমোদিত' : 'অপেক্ষমান';
+                            donHtml += `<div class="history-item">
+                                <div class="history-icon donation"><i class="fas fa-hand-holding-heart"></i></div>
+                                <div class="history-info">
+                                    <strong>${(d.amount || 0).toLocaleString()} ৳ দান</strong>
+                                    <small>${date} &nbsp;|&nbsp; ${d.provider || 'অনলাইন'}</small>
+                                </div>
+                                <span class="status-badge-sm ${statusClass}">${statusLabel}</span>
+                            </div>`;
+                        });
+                    }
+                    document.getElementById('dashDonationsList').innerHTML = donHtml;
+                    document.getElementById('dashTotalDonations').textContent = totalDonation.toLocaleString('bn-BD');
                 });
 
-                showNotification(`${providerName} পেমেন্ট পেজে যাচ্ছেন...`, 'success');
+            } catch (e) { console.error('Dashboard লোড সমস্যা:', e); }
+        }
 
-                setTimeout(() => {
-                    submitPaymentForm(paymentUrl, { amount: amount, ref: donationRef.id, name: donorName });
-                    btn.disabled = false;
-                    loading.classList.remove('active');
-                }, 1000);
+        function switchDashTab(tab, el) {
+            document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.dash-tab-content').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            document.getElementById(`dash-${tab}`).classList.add('active');
+        }
 
+        async function resetPassword() {
+            const email = document.getElementById('drawerEmail').value.trim();
+            if (!email) { showNotification('প্রথমে উপরের বক্সে আপনার ইমেইল ঠিকানা লিখুন', 'error'); return; }
+            try {
+                await auth.sendPasswordResetEmail(email);
+                showNotification('পাসওয়ার্ড রিসেট লিংক আপনার ইমেইলে পাঠানো হয়েছে!', 'success');
             } catch (error) {
-                showNotification('সমস্যা হয়েছে। আবার চেষ্টা করুন।', 'error');
-                btn.disabled = false;
-                loading.classList.remove('active');
+                showNotification('ইমেইলটি সঠিক নয় বা সমস্যা হয়েছে!', 'error');
             }
         }
 
-        // ========== লাইভ চ্যাট ==========
+        async function editProfilePrompt() {
+            if (!currentUser) return;
+            const newPhone = prompt('আপনার নতুন মোবাইল নম্বর দিন:');
+            const newAddress = prompt('আপনার নতুন ঠিকানা দিন:');
+            let updates = {};
+            if (newPhone) updates.phone = newPhone;
+            if (newAddress) updates.address = newAddress;
+            if (Object.keys(updates).length > 0) {
+                try {
+                    await db.collection('users').doc(currentUser.uid).update(updates);
+                    showNotification('প্রোফাইল আপডেট হয়েছে!', 'success');
+                    loadMemberDashboard(currentUser);
+                } catch(e) {}
+            }
+        }
+
+        // লাইভ চ্যাট
         window.toggleChat = function() {
             document.getElementById('chatWidget').classList.toggle('active');
-            if(document.getElementById('chatWidget').classList.contains('active')){
-                loadChatMessages();
-            }
+            if(document.getElementById('chatWidget').classList.contains('active')){ loadChatMessages(); }
         };
 
         async function loadChatMessages() {
@@ -2809,7 +2593,7 @@
                     html += `
                         <div class="message ${isSent ? 'sent' : ''}">
                             <div class="message-content">${msg.text}</div>
-                            <small>${msg.userName}</small>
+                            <small style="font-size:0.7rem; color:#888;">${msg.userName}</small>
                         </div>
                     `;
                 });
@@ -2834,51 +2618,14 @@
             } catch (error) {}
         };
 
-        // ========== নিউজ টিকার ==========
-        let tickerPos = null;
-        let tickerRAF = null;
-
-        function startTickerScroll() {
-            const wrap = document.querySelector('.news-ticker');
-            const el   = document.getElementById('newsTickerContent');
-            if (!wrap || !el) return;
-            if (tickerRAF) { cancelAnimationFrame(tickerRAF); tickerRAF = null; }
-            wrap.style.overflow = 'hidden';
-            el.style.display    = 'inline-block';
-            el.style.whiteSpace = 'nowrap';
-            
-            const wrapW = wrap.offsetWidth;
-            if (tickerPos === null || tickerPos < -el.offsetWidth) { tickerPos = wrapW; }
-
-            let lastTime = null;
-            function step(timestamp) {
-                if (!lastTime) lastTime = timestamp;
-                const delta = timestamp - lastTime;
-                lastTime = timestamp;
-                const speed = (window._tickerSpeed || 1.2) * (delta / 16.67);
-                tickerPos -= speed;
-                if (tickerPos < -el.offsetWidth) tickerPos = wrapW;
-                el.style.transform = `translateX(${Math.round(tickerPos)}px)`;
-                tickerRAF = requestAnimationFrame(step);
-            }
-            tickerRAF = requestAnimationFrame(step);
-        }
-
-        function loadNewsTicker() {
-            db.collection('newsTicker').orderBy('updatedAt', 'desc').limit(1).onSnapshot(snapshot => {
-                if (!snapshot.empty) {
-                    const d = snapshot.docs[0].data();
-                    document.getElementById('newsTickerContent').innerHTML = d.content || '';
-                    if (d.speed) window._tickerSpeed = parseFloat(d.speed) || 1.2;
-                    setTimeout(startTickerScroll, 200);
-                }
-            });
-        }
-
         window.openImage = function(url) { window.open(url, '_blank'); };
 
-        // ========== ইনিশিয়ালাইজেশন ==========
+        // ইনিশিয়ালাইজেশন
         document.addEventListener('DOMContentLoaded', () => {
+            captureDeviceRefreshRate((fps) => {
+                console.log(`ডিভাইস রিফ্রেশ রেট ডিটেক্টেড: ${fps}Hz`);
+            });
+            initSiteSettingsListener();
             initRealtimeData();
             loadNewsTicker();
             loadPrayerTimes();
