@@ -911,7 +911,7 @@
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.65);
-            z-index: 2000; /* ড্রয়ারের উপরে থাকবে */
+            z-index: 2000;
             align-items: center;
             justify-content: center;
             padding: 1rem;
@@ -1030,12 +1030,12 @@
             <li><a href="#home" onclick="scrollToSection('home');"><i class="fas fa-home"></i> হোম</a></li>
             <li id="dashboardMenuLink" style="display:none;"><a href="#" onclick="scrollToSection('memberDashboard');"><i class="fas fa-tachometer-alt" style="color:#ffd700;"></i> আমার Dashboard</a></li>
             
-            <!-- ৭. ভারপ্রাপ্ত কমিটি বৃন্দ (নতুন যুক্ত - সদস্য লিস্টের উপরে) -->
+            <!-- ভারপ্রাপ্ত কমিটি বৃন্দ (সদস্য লিস্টের উপরে) -->
             <li>
                 <a href="#" onclick="openCommitteeModal(); return false;"><i class="fas fa-user-shield"></i> ভারপ্রাপ্ত কমিটি বৃন্দ</a>
             </li>
 
-            <!-- সদস্য লিস্ট সাব-মেনু (ক্লিক করলে ড্রয়ার ব্যাকগ্রাউন্ডে থাকবে) -->
+            <!-- সদস্য লিস্ট সাব-মেনু -->
             <li>
                 <a href="#" onclick="toggleSubMenu('memberSubMenu'); return false;"><i class="fas fa-users"></i> সদস্য লিস্ট <i class="fas fa-chevron-down" style="margin-left:auto;font-size:0.8rem;"></i></a>
                 <ul id="memberSubMenu" style="display:none; list-style:none; background: #f8f9fa; border-left: 3px solid #1a472a; padding-left: 10px;">
@@ -1086,7 +1086,7 @@
     </div>
     <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 
-    <!-- ========== ৫. স্লিম নামাজের সময়সূচী বার ========== -->
+    <!-- ========== স্লিম নামাজের সময়সূচী বার ========== -->
     <div class="prayer-times-bar">
         <div class="prayer-times-inner">
             <span class="prayer-label"><i class="fas fa-mosque"></i> নামাজের সময়:</span>
@@ -1099,7 +1099,7 @@
         </div>
     </div>
 
-    <!-- ========== ৬. মসৃণ নিউজ টিকার ========== -->
+    <!-- ========== মসৃণ নিউজ টিকার ========== -->
     <div class="news-ticker">
         <div class="news-ticker-content" id="newsTickerContent">
             <i class="fas fa-star"></i> আসসালামু আলাইকুম! নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ সংগঠনের সকল কার্যক্রম সম্পর্কে জানতে আমাদের সাথেই থাকুন। 
@@ -1111,7 +1111,7 @@
         <div class="hero-pattern"></div>
         <div class="hero-content">
             <span class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</span>
-            <h1 id="heroMainHeading">নারায়নপুর ইসলামী আইডিয়াল যুব সমাজে আপনাকে স্বাগতম</h1>
+            <h1 id="heroMainHeading">নারায়নপুর ইসলামী আইডিয়াল যুবসমাজে আপনাকে স্বাগতম</h1>
             <p class="hero-tagline">একটি সুন্দর ইসলামিক সমাজ গড়ার লক্ষ্যে আমরা একতাবদ্ধ</p>
             <div class="hero-ayat">
                 <span>وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ</span><br>
@@ -1283,7 +1283,7 @@
         <div id="galleryContainer" class="gallery-grid"></div>
     </section>
 
-    <!-- ========== ৪. দান সেকশন ========== -->
+    <!-- ========== দান সেকশন ========== -->
     <section id="payment" class="donate-hero">
         <h2><i class="fas fa-hand-holding-heart" style="color: #ffd700;"></i> দান করুন</h2>
         <p>আল্লাহর পথে দান করুন, সওয়াব অর্জন করুন</p>
@@ -1310,7 +1310,6 @@
                 <input type="text" id="donateNote" placeholder="কি বিষয়ে দান করছেন?" style="width:100%; padding:0.75rem; border:1px solid #ddd; border-radius:10px;">
             </div>
 
-            <!-- বাটনে ক্লিক করলে ইসলামিক চেকআউট মডাল ওপেন হবে -->
             <button class="donate-btn" id="donateBtn" onclick="openIslamicCheckout()">
                 <i class="fas fa-heart"></i> দান সম্পূর্ণ করুন
             </button>
@@ -1323,7 +1322,7 @@
 
     <!-- ========== পাবলিক দান ইতিহাস ========== -->
     <section class="donation-history-section">
-        <h2 class="section-title">সকল দানের ইতিহাস</h2>
+        <h2 class="section-title">সকল দানের বিবরণ</h2>
         <div class="donation-feed" id="donationHistoryFeed"></div>
     </section>
 
@@ -1344,7 +1343,7 @@
         </div>
     </div>
 
-    <!-- ========== ৪. ইসলামিক দান চেকআউট মডাল (নতুন) ========== -->
+    <!-- ========== ইসলামিক দান চেকআউট মডাল ========== -->
     <div class="modal" id="islamicCheckoutModal">
         <div class="modal-content" style="max-width: 500px; padding: 1.6rem;">
             <div class="modal-header">
@@ -1358,13 +1357,11 @@
             </div>
 
             <div id="checkoutStepForm">
-                <!-- ইসলামিক দোয়া ও আয়াত -->
                 <div style="background: linear-gradient(135deg, #f0f7f2, #e8f5ec); border-left: 4px solid #1a472a; padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1.1rem; text-align: center;">
                     <div style="font-family:'Amiri',serif; font-size:1.25rem; color:#1a472a; margin-bottom:0.15rem;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
                     <div style="font-size:0.8rem; color:#2d6a4f; font-style:italic;">"সাদাকাহ পাপ মুছে দেয়, যেভাবে পানি আগুন নিভিয়ে দেয়।" — তিরমিযী</div>
                 </div>
 
-                <!-- দানের সারাংশ -->
                 <div style="background:#fafafa; border:1px solid #eee; border-radius:12px; padding:0.9rem; margin-bottom:1.1rem;">
                     <div style="display:flex; justify-content:space-between; margin-bottom:0.35rem; font-size:0.88rem;">
                         <span style="color:#666;">দাতার নাম:</span>
@@ -1380,7 +1377,6 @@
                     </div>
                 </div>
 
-                <!-- পেমেন্ট মেথড নির্বাচন -->
                 <div style="margin-bottom:1.1rem;">
                     <label style="display:block; font-weight:600; font-size:0.85rem; color:#1a472a; margin-bottom:0.5rem;">
                         <i class="fas fa-wallet"></i> দান প্রদানের মেথড নির্বাচন করুন:
@@ -1390,12 +1386,8 @@
                     </div>
                 </div>
 
-                <!-- নির্বাচিত মেথডের বিস্তারিত -->
-                <div id="selectedMethodDetails" style="display:none; background:#f4fbf6; border:1.5px solid #c3e6cb; border-radius:10px; padding:0.85rem; margin-bottom:1.1rem;">
-                    <!-- ডায়নামিক নম্বর ও নির্দেশিকা আসবে -->
-                </div>
+                <div id="selectedMethodDetails" style="display:none; background:#f4fbf6; border:1.5px solid #c3e6cb; border-radius:10px; padding:0.85rem; margin-bottom:1.1rem;"></div>
 
-                <!-- ট্রানজেকশন তথ্য পূরণ -->
                 <div id="checkoutTxFields" style="display:none;">
                     <div class="form-group" style="margin-bottom:0.75rem;">
                         <label style="font-size:0.85rem; color:#333; font-weight:600;">যে নাম্বার থেকে টাকা পাঠিয়েছেন সেটি দিন  *</label>
@@ -1411,7 +1403,6 @@
                 </div>
             </div>
 
-            <!-- জাযাকাল্লাহু খাইরান কনফার্মেশন স্ক্রিন -->
             <div id="checkoutSuccessScreen" style="display:none; text-align:center; padding:1.2rem 0.4rem;">
                 <div style="width:64px; height:64px; background:#d4edda; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem; color:#28a745; font-size:2rem;">
                     <i class="fas fa-check"></i>
@@ -1429,16 +1420,14 @@
         </div>
     </div>
 
-    <!-- ========== ৭. ভারপ্রাপ্ত কমিটি বৃন্দ মডাল (নতুন) ========== -->
+    <!-- ========== ভারপ্রাপ্ত কমিটি বৃন্দ মডাল ========== -->
     <div class="modal" id="committeeModal">
         <div class="modal-content" style="max-width: 600px;">
             <div class="modal-header">
                 <h3 style="color:#1a472a;"><i class="fas fa-user-shield" style="color:#ffd700;"></i> ভারপ্রাপ্ত কমিটি বৃন্দ</h3>
                 <span class="modal-close" onclick="closeModal('committeeModal')">&times;</span>
             </div>
-            <div id="committeeListContent" style="padding: 0.5rem 0;">
-                <!-- ডাইনামিক কমিটি লিস্ট লোড হবে -->
-            </div>
+            <div id="committeeListContent" style="padding: 0.5rem 0;"></div>
         </div>
     </div>
 
@@ -1488,13 +1477,13 @@
                 <div class="form-group">
                     <div style="position:relative;">
                         <input type="password" id="regPassword" placeholder="পাসওয়ার্ড" required style="width:100%; padding-right:2.5rem;">
-                        <span onclick="togglePassVis('regPassword', this)" style="position:absolute;right:0.7rem;top:50%;transform:translateY(-50%);cursor:pointer;color:#888;"><i class="fas fa-eye"></i></span>
+                        <span onclick="togglePassVis('regPassword', this)" style="position:absolute;right:0.7rem;top:50%;transform:translateY(-50%);cursor:pointer;color:#888;font-size:0.95rem;"><i class="fas fa-eye"></i></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <div style="position:relative;">
                         <input type="password" id="regConfirmPassword" placeholder="পাসওয়ার্ড নিশ্চিত করুন" required style="width:100%; padding-right:2.5rem;">
-                        <span onclick="togglePassVis('regConfirmPassword', this)" style="position:absolute;right:0.7rem;top:50%;transform:translateY(-50%);cursor:pointer;color:#888;"><i class="fas fa-eye"></i></span>
+                        <span onclick="togglePassVis('regConfirmPassword', this)" style="position:absolute;right:0.7rem;top:50%;transform:translateY(-50%);cursor:pointer;color:#888;font-size:0.95rem;"><i class="fas fa-eye"></i></span>
                     </div>
                 </div>
                 <button type="submit" class="btn">নিবন্ধন সম্পন্ন করুন</button>
@@ -1511,7 +1500,7 @@
                     <div style="width:50px;height:50px;background:linear-gradient(135deg,#1a472a,#2d6a4f);border-radius:12px;display:flex;align-items:center;justify-content:center;">
                         <i class="fas fa-mosque" style="color:#ffd700;font-size:1.4rem;"></i>
                     </div>
-                    <h3 style="color:#1a472a;font-size:1.3rem;">নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ</h3>
+                    <h3 id="aboutSiteTitle" style="color:#1a472a;font-size:1.3rem;">নারায়নপুর ইসলামী আইডিয়াল যুব সমাজ</h3>
                 </div>
                 <p style="color:#555;line-height:1.9;font-size:0.95rem;">আমরা একটি অরাজনৈতিক ইসলামী সংগঠন যা ইসলামের সঠিক বার্তা প্রচার, যুব সমাজের নৈতিক উন্নয়ন এবং সমাজকল্যাণমূলক কার্যক্রমে নিবেদিত। আমাদের লক্ষ্য হলো কুরআন ও সুন্নাহর আলোকে একটি আদর্শ সমাজ গড়ে তোলা।</p>
             </div>
@@ -1618,7 +1607,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
     <script>
-        // ========== ফায়ারবেস কনফিগারেশন ==========
         const firebaseConfig = {
             apiKey: "AIzaSyDFvkSCaAnTNZ_sxWBZUbKq0w1L9uoL1RI",
             authDomain: "narayanpur-youth-organization.firebaseapp.com",
@@ -1638,9 +1626,8 @@
 
         let currentUser = null;
         let isRegistering = false;
-        let selectedPreset = 0;
 
-        // ========== ১ ও ৬. রিফ্রেশ রেট স্বয়ংক্রিয় ক্যাপচার লজিক ==========
+        // ========== ১ ও ৬. ডিভাইস রিফ্রেশ রেট ডিটেকশন ==========
         let deviceRefreshRate = 60;
         let fpsMultiplier = 1;
 
@@ -1825,7 +1812,6 @@
             el.style.display = el.style.display === 'none' ? 'block' : 'none';
         }
 
-        // মডাল খোলার সময় ড্রয়ার ব্যাকগ্রাউন্ডে বহাল থাকবে (অটোমেটিক রিমুভ হবে না)
         function showRegisterModal() {
             document.getElementById('registerModal').classList.add('active');
         }
@@ -1863,7 +1849,7 @@
             setTimeout(() => { if(toast.parentNode) toast.remove(); }, 3500);
         }
 
-        // ========== ৭. ভারপ্রাপ্ত কমিটি বৃন্দ মডাল ফাংশন ==========
+        // ========== ৭. ভারপ্রাপ্ত কমিটি বৃন্দ মডাল ফাংশন (সিঙ্ক ফিক্স) ==========
         async function openCommitteeModal() {
             const modal = document.getElementById('committeeModal');
             modal.classList.add('active');
@@ -1871,25 +1857,31 @@
             listEl.innerHTML = '<div style="text-align:center;padding:2rem;"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</div>';
 
             try {
-                const snap = await db.collection('committee').orderBy('serial', 'asc').get();
+                // উভয় ধরনের অর্ডার ফিল্ড সাপোর্ট করে ফেচ করা
+                const snap = await db.collection('committee').get();
                 if (snap.empty) {
                     listEl.innerHTML = '<div style="text-align:center;padding:2rem;color:#888;">বর্তমানে কোনো কমিটি তথ্য পাওয়া যায়নি।</div>';
                     return;
                 }
 
+                let members = [];
+                snap.forEach(doc => members.push({ id: doc.id, ...doc.data() }));
+                // ক্রমিক নম্বর (order বা serial) অনুযায়ী পারফেক্ট সর্ট
+                members.sort((a, b) => (Number(a.order ?? a.serial ?? 999) - Number(b.order ?? b.serial ?? 999)));
+
                 let html = '<div style="display:grid; grid-template-columns: 1fr; gap: 0.8rem;">';
-                snap.forEach(doc => {
-                    const c = doc.data();
+                members.forEach(c => {
+                    const orderNo = c.order ?? c.serial ?? '—';
+                    const photoHtml = c.photo ? 
+                        `<img src="${c.photo}" style="width:50px; height:50px; border-radius:50%; object-fit:cover; border:2px solid #ffd700; flex-shrink:0;">` : 
+                        `<div style="width:50px; height:50px; background:linear-gradient(135deg, #1a472a, #2d6a4f); color:#ffd700; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.25rem; font-weight:bold; flex-shrink:0;">${(c.name || 'ক')[0].toUpperCase()}</div>`;
+
                     html += `
                         <div style="background:#fff; border:1px solid #e2ece5; padding:0.9rem 1rem; border-radius:12px; display:flex; gap:0.9rem; align-items:center; box-shadow:0 2px 6px rgba(0,0,0,0.04); position:relative;">
                             <div style="position:absolute; right:12px; top:12px; background:#e8f5ec; color:#1a472a; padding:0.18rem 0.6rem; border-radius:20px; font-size:0.75rem; font-weight:700;">
-                                ক্রমিক: ${c.serial || '—'}
+                                ক্রমিক: ${orderNo}
                             </div>
-                            ${c.photo ? `<img src="${c.photo}" style="width:50px; height:50px; border-radius:50%; object-fit:cover; border:2px solid #ffd700; flex-shrink:0;">` : `
-                                <div style="width:50px; height:50px; background:linear-gradient(135deg, #1a472a, #2d6a4f); color:#ffd700; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.25rem; font-weight:bold; flex-shrink:0;">
-                                    ${(c.name || 'ক')[0].toUpperCase()}
-                                </div>
-                            `}
+                            ${photoHtml}
                             <div style="flex:1; padding-right:55px;">
                                 <h4 style="color:#1a472a; margin-bottom:0.2rem; font-size:1rem;">${c.name || 'নাম নেই'}</h4>
                                 <div style="display:inline-block; background:#ffd700; color:#1a472a; font-size:0.78rem; font-weight:700; padding:0.15rem 0.55rem; border-radius:6px; margin-bottom:0.25rem;">
@@ -1907,7 +1899,7 @@
             }
         }
 
-        // সদস্য লিস্ট মডাল (ড্রয়ার ব্যাকগ্রাউন্ডে থাকবে)
+        // সদস্য লিস্ট মডাল
         async function openMemberListModal(type) {
             const modal = document.getElementById('memberListModal');
             modal.classList.add('active');
@@ -2004,7 +1996,7 @@
             }
         }
 
-        // ========== ৪. ইসলামিক দান চেকআউট লজিক ==========
+        // ========== ৪. ইসলামিক দান চেকআউট লজিক (সিঙ্ক ফিক্স) ==========
         let currentSelectedMethod = null;
 
         function setDonateAmount(val) {
@@ -2043,15 +2035,19 @@
         async function loadIslamicCheckoutMethods() {
             const container = document.getElementById('checkoutMethodsContainer');
             try {
-                const snap = await db.collection('donationPaymentMethods').where('isActive', '==', true).get();
+                // অ্যাডমিনের 'paymentMethods' এবং বিকল্প 'donationPaymentMethods' উভয়ই চেক করা
+                let snap = await db.collection('paymentMethods').where('isActive', '==', true).get();
                 if (snap.empty) {
-                    // ডিফল্ট অফলাইন/ম্যানুয়াল মেথড ব্যাকআপ
+                    snap = await db.collection('donationPaymentMethods').where('isActive', '==', true).get();
+                }
+
+                if (snap.empty) {
                     container.innerHTML = `
-                        <div onclick="selectCheckoutMethod({name:'বিকাশ', number:'+৮৮০১৮৭৩০১১৭৩৬', type:'Personal', instruction:'বিকাশ Send Money করে নিচের বক্সে TrxID লিখুন'})" style="border:1.5px solid #ddd; border-radius:10px; padding:0.7rem; text-align:center; cursor:pointer;">
+                        <div onclick="selectCheckoutMethod({name:'বিকাশ', number:'+৮৮০১৮৭৩০১১৭৩৬', type:'Personal', instructions:'বিকাশ Send Money করে নিচের বক্সে TrxID লিখুন'})" style="border:1.5px solid #ddd; border-radius:10px; padding:0.7rem; text-align:center; cursor:pointer;">
                             <i class="fas fa-mobile-alt" style="color:#e2136e; font-size:1.5rem; display:block; margin-bottom:0.2rem;"></i>
                             <strong style="font-size:0.85rem;">বিকাশ</strong>
                         </div>
-                        <div onclick="selectCheckoutMethod({name:'নগদ', number:'+৮৮০১৮৭৩০১১৭৩৬', type:'Personal', instruction:'নগদ Send Money করে ট্রানজেকশন আইডি দিন'})" style="border:1.5px solid #ddd; border-radius:10px; padding:0.7rem; text-align:center; cursor:pointer;">
+                        <div onclick="selectCheckoutMethod({name:'নগদ', number:'+৮৮০১৮৭৩০১১৭৩৬', type:'Personal', instructions:'নগদ Send Money করে ট্রানজেকশন আইডি দিন'})" style="border:1.5px solid #ddd; border-radius:10px; padding:0.7rem; text-align:center; cursor:pointer;">
                             <i class="fas fa-wallet" style="color:#f7941d; font-size:1.5rem; display:block; margin-bottom:0.2rem;"></i>
                             <strong style="font-size:0.85rem;">নগদ</strong>
                         </div>
@@ -2090,6 +2086,8 @@
 
             const det = document.getElementById('selectedMethodDetails');
             det.style.display = 'block';
+            const instructionText = method.instructions || method.instruction || 'উক্ত নম্বরে টাকা পাঠিয়ে নিচের বক্সে TrxID এবং আপনার নম্বর প্রদান করুন।';
+
             det.innerHTML = `
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
                     <strong style="color:#1a472a; font-size:0.9rem;">${method.name} (${method.type || 'পার্সোনাল'})</strong>
@@ -2101,7 +2099,7 @@
                     📞 ${method.number}
                 </div>
                 <div style="font-size:0.8rem; color:#555; line-height:1.4;">
-                    <i class="fas fa-info-circle" style="color:#1a472a;"></i> ${method.instruction || 'উক্ত নম্বরে টাকা পাঠিয়ে নিচের বক্সে TrxID এবং আপনার নম্বর প্রদান করুন।'}
+                    <i class="fas fa-info-circle" style="color:#1a472a;"></i> ${instructionText}
                 </div>
             `;
             document.getElementById('checkoutTxFields').style.display = 'block';
@@ -2140,6 +2138,7 @@
                     amount: amount,
                     provider: currentSelectedMethod.name,
                     senderPhone: senderPhone,
+                    senderNumber: senderPhone, // অ্যাডমিন প্যানেলের ফিল্ড সিঙ্ক
                     trxId: trxId.toUpperCase(),
                     note: note,
                     status: 'pending',
@@ -2187,12 +2186,10 @@
                 const delta = timestamp - lastTime;
                 lastTime = timestamp;
                 
-                // ফ্রেম রেট ডেল্টা ক্যালকুলেশন
                 const speed = (window._tickerSpeed || 1.2) * (delta / 16.67);
                 tickerPos -= speed;
                 if (tickerPos < -el.offsetWidth) tickerPos = wrapW;
                 
-                // সাব-পিক্সেল ট্রান্সফর্ম (Math.round বাদ দিয়ে তরল অ্যানিমেশন)
                 el.style.transform = `translate3d(${tickerPos}px, 0, 0)`;
                 tickerRAF = requestAnimationFrame(step);
             }
@@ -2210,30 +2207,33 @@
             });
         }
 
-        // ========== ৩. সাইট সেটিংস ও সোশ্যাল মিডিয়া রিয়েল-টাইম লোড ==========
+        // ========== ৩. সাইট সেটিংস ও সোশ্যাল মিডিয়া রিয়েল-টাইম লোড (সিঙ্ক ফিক্স) ==========
         function initSiteSettingsListener() {
             db.collection('settings').doc('siteInfo').onSnapshot(doc => {
                 if (!doc.exists) return;
                 try {
                     const d = doc.data();
                     
-                    // ৩ নং ফিক্স: সাইটের নাম ডায়নামিক আপডেট
-                    if (d.siteName && d.siteName.trim() !== '') {
-                        document.getElementById('siteHeaderTitle').textContent = d.siteName;
-                        document.getElementById('drawerSiteTitle').textContent = d.siteName;
-                        document.getElementById('heroMainHeading').textContent = d.siteName + ' এ স্বাগতম';
-                        document.getElementById('aboutSiteTitle').textContent = d.siteName;
-                        document.getElementById('footerOrgTitle').textContent = d.siteName;
-                        document.getElementById('sitePageTitle').textContent = d.siteName;
-                        document.getElementById('copyrightText').innerHTML = `&copy; ২০২৬ ${d.siteName} | Developed By Tuhin Ahmed`;
+                    // অ্যাডমিনের orgName অথবা siteName উভয়ই চেক করা
+                    const sName = d.orgName || d.siteName;
+                    if (sName && sName.trim() !== '') {
+                        document.getElementById('siteHeaderTitle').textContent = sName;
+                        document.getElementById('drawerSiteTitle').textContent = sName;
+                        document.getElementById('heroMainHeading').textContent = sName + ' এ স্বাগতম';
+                        const aboutH = document.getElementById('aboutSiteTitle');
+                        if (aboutH) aboutH.textContent = sName;
+                        document.getElementById('footerOrgTitle').textContent = sName;
+                        document.getElementById('sitePageTitle').textContent = sName;
+                        document.getElementById('copyrightText').innerHTML = `&copy; ২০২৬ ${sName} | সর্বস্বত্ব সংরক্ষিত.`;
                     }
 
-                    // ৩ নং ফিক্স: সাইট লোগো ইমেজ ডিরেক্ট লিংক হ্যান্ডলিং
-                    if (d.siteLogoUrl && d.siteLogoUrl.trim() !== '') {
-                        document.getElementById('siteHeaderIconWrapper').innerHTML = `<img src="${d.siteLogoUrl}" alt="Logo">`;
-                        document.getElementById('drawerLogoBox').innerHTML = `<img src="${d.siteLogoUrl}" alt="Logo">`;
+                    // অ্যাডমিনের orgLogo অথবা siteLogoUrl উভয়ই চেক করা
+                    const sLogo = d.orgLogo || d.siteLogoUrl;
+                    if (sLogo && sLogo.trim() !== '') {
+                        document.getElementById('siteHeaderIconWrapper').innerHTML = `<img src="${sLogo}" alt="Logo">`;
+                        document.getElementById('drawerLogoBox').innerHTML = `<img src="${sLogo}" alt="Logo">`;
                         const fav = document.getElementById('siteFavicon');
-                        if (fav) fav.href = d.siteLogoUrl;
+                        if (fav) fav.href = sLogo;
                     } else {
                         document.getElementById('siteHeaderIconWrapper').innerHTML = `<i class="fas fa-mosque" id="siteHeaderIcon"></i>`;
                         document.getElementById('drawerLogoBox').innerHTML = `<i class="fas fa-mosque" id="drawerMosqueIcon"></i>`;
@@ -2265,7 +2265,6 @@
 
         // ========== রিয়েল-টাইম ডাটা লোডিং ==========
         function initRealtimeData() {
-            // ১. নিউজ
             db.collection('news').where('status', '==', 'published').orderBy('createdAt', 'desc').limit(6)
             .onSnapshot(snapshot => {
                 const container = document.getElementById('newsContainer');
@@ -2288,7 +2287,6 @@
                 container.innerHTML = html;
             });
 
-            // ২. ইভেন্ট 
             db.collection('events').orderBy('date', 'desc').onSnapshot(snapshot => {
                 const container = document.getElementById('calendar');
                 if (snapshot.empty) { container.innerHTML = '<div style="text-align: center; color: #888; padding: 2rem;">বর্তমানে কোনো ইভেন্ট নেই।</div>'; return; }
@@ -2302,7 +2300,6 @@
                             <p style="font-size: 0.85rem; color: #555; margin-bottom: 0.3rem;"><i class="fas fa-calendar-alt" style="color: #ffd700;"></i> তারিখ: ${eventDate}</p>
                             <p style="font-size: 0.85rem; color: #555; margin-bottom: 0.6rem;"><i class="fas fa-map-marker-alt" style="color: #ffd700;"></i> স্থান: ${event.location}</p>
                             <p style="font-size: 0.9rem; color: #333; margin-bottom: 0.8rem;">${event.description}</p>
-                            <button class="btn btn-small" onclick="attendEvent('${doc.id}')" style="width: 100%;"><i class="fas fa-check-circle"></i> অংশগ্রহণ করুন</button>
                         </div>
                     `;
                 });
@@ -2310,7 +2307,6 @@
                 container.innerHTML = html;
             });
 
-            // ৩. গ্যালারি
             db.collection('gallery').orderBy('createdAt', 'desc').limit(8).onSnapshot(snapshot => {
                 const container = document.getElementById('galleryContainer');
                 let html = '';
@@ -2326,7 +2322,6 @@
                 container.innerHTML = html;
             });
 
-            // ৪. স্ট্যাটিস্টিক্স
             db.collection('users').onSnapshot(snap => { document.getElementById('totalMembers').textContent = snap.size + '+'; });
             db.collection('events').onSnapshot(snap => { document.getElementById('totalEvents').textContent = snap.size + '+'; });
             db.collection('news').onSnapshot(snap => { document.getElementById('totalNews').textContent = snap.size + '+'; });
